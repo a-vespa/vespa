@@ -6,5 +6,5 @@ These parameters are sourced from their original sources.
 * [`bart-large-qa-finetuned.md`](bart-large-qa-finetuned.md)
 * [`bert-base-uncased-qa-finetuned.md`](bert-base-uncased-qa-finetuned.md)
 * [`bert-large-uncased-whole-word-masking-qa-finetuned.md`](bert-large-uncased-whole-word-masking-qa-finetuned.md)
-* [`electra-large-discriminator-qa-finetuning.md`](electra-large-discriminator-qa-finetuning.md)
-* [`spanbert-base-qa-finetuning.md`](spanbert-base-qa-finetuning.md)
+* [`electra-large-discriminator-qa-finetuned.md`](electra-large-discriminator-qa-finetuned.md)
+* [`spanbert-base-qa-finetuned.md`](spanbert-base-qa-finetuned.md)
