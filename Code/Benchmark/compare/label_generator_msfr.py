@@ -53,119 +53,88 @@ class ExtractValidator():
         return True if field.lower() in ['late payment charges', 'gst'] else False
 
     def cleanup(self, gt, answer, field):
-        if self.is_date(field):
-            if gt.lower().find('days') == -1:
-                if LOCALE =="SG":
-                    if re.match("^\d{1,2}\/\d{1,2}\/\d{4}$", gt):
-                        format_str = '%d/%m/%Y' # The format
-                        datetime_obj = datetime.datetime.strptime(gt, format_str)
-                        gt = str(datetime_obj.date())
-                    elif  re.match("^\d{1,2} \d{1,2} \d{4}$", gt):
-                        format_str = '%d %m %Y' # The format
-                        datetime_obj = datetime.datetime.strptime(gt, format_str)
-                        gt =  str(datetime_obj.date())
-                    elif re.match("^\d{1,2}-\d{1,2}-\d{4}$", gt):
-                        format_str = '%d-%m-%Y' # The format
-                        datetime_obj = datetime.datetime.strptime(gt, format_str)
-                        gt =  str(datetime_obj.date())
-                    elif re.match("^\d{1,2}.\d{1,2}.\d{4}$", gt):
-                        format_str = '%d.%m.%Y' # The format
-                        datetime_obj = datetime.datetime.strptime(gt, format_str)
-                        gt =  str(datetime_obj.date())
-                    else:
-                        try:
-                            dategt = moment.date(gt)
-                            dategt = str(dategt)
-                            gt = dategt[:10]
-                        except:
-                            pass
-                elif LOCALE =="US":
-                    try:
-                        if re.match("^\d{1,2}\/\d{1,2}\/\d{4}$", gt):
-                            format_str = '%m/%d/%Y' # The format
-                            datetime_obj = datetime.datetime.strptime(gt, format_str)
-                            gt = str(datetime_obj.date())
-                        elif  re.match("^\d{1,2} \d{1,2} \d{4}$", gt):
-                            format_str = '%m %d %Y' # The format
-                            datetime_obj = datetime.datetime.strptime(gt, format_str)
-                            gt =  str(datetime_obj.date())
-                        elif re.match("^\d{1,2}-\d{1,2}-\d{4}$", gt):
-                            format_str = '%m-%d-%Y' # The format
-                            datetime_obj = datetime.datetime.strptime(gt, format_str)
-                            gt =  str(datetime_obj.date())
-                        elif re.match("^\d{1,2}.\d{1,2}.\d{4}$", gt):
-                            format_str = '%d.%m.%Y' # The format
-                            datetime_obj = datetime.datetime.strptime(gt, format_str)
-                            gt =  str(datetime_obj.date())
-                        else:
-                            try:
-                                dategt = moment.date(gt)
-                                dategt = str(dategt)
-                                gt = dategt[:10]
-                            except:
-                                pass
-                    except:
-                            dategt = moment.date(gt)
-                            dategt = str(dategt)
-                            gt = dategt[:10]
-                gt, answer = re.sub(
-                    "[\/\-\.]", " ", gt), re.sub("[\/\-\.]", " ", answer)
-        elif self.is_amount(field):
-            print(gt ,answer )
-            gt, answer = re.sub("[\$\,]", "", gt), re.sub("[\$\,]", "", str(answer))
-
-        return gt.lower().strip(), answer.lower().strip()
-
-    def isEM(self, gt, answer, field):
-        if self.is_date(field):
-            #if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
-            if (gt==answer) or (answer == "na" and gt == ""):
-                return True
-        elif self.is_amount(field):
-            if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
-                return True
+        if field!="Payment terms":
+            gt = gt.replace(']','').replace('[','')
+            gt= gt.replace("'," ,"@#@")
+            gts = gt.replace("'",'').split("@#@")
         else:
-            if fuzz.token_sort_ratio(gt, answer) >= 90 or (answer == "na" and gt == ""):
+            gts = gt
+        if self.is_date(field):
+            gts = [re.sub("[\/\-\.]", " ", gt) for gt in gts]
+            answer = re.sub("[\/\-\.]", " ", answer)
+            # if field =="Invoice Date":
+            #     print(answer , gts)
+        elif self.is_amount(field):
+            gts = [re.sub("[\$\,]", "", gt) for gt in gts]
+            answer = re.sub("[\$\,]", "", str(answer))
+        
+        return [gt.lower().strip()  for gt in gts], answer.lower().strip()
+
+    def isEM(self, gts, answer, field):
+        for gt in gts:
+            if self.is_date(field):
+                #if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
+                if (gt==answer) or (answer == "na" and gt == ""):
+                    return True
+            elif self.is_amount(field):
+                if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
+                    return True
+            else:
+                if fuzz.token_sort_ratio(gt, answer) >= 90 or (answer == "na" and gt == ""):
+                    return True
+        return False
+
+    def isNA(self, gts, answer, field):
+        for gt in gts:
+            if answer == "na":
                 return True
         return False
 
-    def isNA(self, gt, answer, field):
-        if answer == "na":
-            return True
-        return False
+    def _isPM(self, gt, answer, field):
 
-    def isPM(self, gt, answer, field):
-        if self.is_date(field):
+        if self.is_date(field):  
             if self.len_diff(gt, answer) > 0 and self.partial_score(gt, answer) >= 80:
                 super_str, sub_str = self.max(gt, answer)
                 if not self.is_substr(super_str, sub_str):
-                    return False
-                return True
+                    return False, 0
+                return True, self.partial_score(gt, answer)
 
         elif self.is_amount(field):
             if self.len_diff(gt, answer) > 0 and self.partial_score(gt, answer) >= 70:
                 if len(answer) > len(gt) and gt == "0":
-                    return False
+                    return False, 0
                 elif len(answer) > len(gt) and self.is_substr(answer, "{:.2f}".format(float(gt))):
-                    return True
+                    return True, self.partial_score(gt, answer)
                 elif len(gt) > len(answer) and str(int(float(gt))) == answer:
-                    return True
-                return False
+                    return True, self.partial_score(gt, answer)
+                return False, 0
             else:
-                return False
+                return False, 0
 
         elif self.is_tax(field):
             if self.len_diff(gt, answer) > 0 and self.partial_score(gt, answer) >= 70:
                 if len(answer) > len(gt) and self.is_substr(answer, gt):
-                    return True
-                return False
+                    return True, self.partial_score(gt, answer)
+                return False, 0
             else:
-                return False
+                return False, 0
 
         else:
             if fuzz.token_sort_ratio(gt, answer) < 90 and self.partial_score(gt, answer) > 60:
-                return True
-        return False
+                return True, self.partial_score(gt, answer)
+        return False, 0
+
+    def isPM(self, gts, answer, field):
+        p_answer = None
+        p_score = 0
+        gt_value=None
+        for gt in gts:
+            status, score = self._isPM(gt, answer, field)
+            if status is True and score > p_score:
+                p_answer = answer
+                p_score = score
+                gt_value = gt
+        return False if p_answer is None else True,gt_value, p_answer
 
     def isWRONG(self, gt, answer, field):
         if self.is_date(field):
@@ -250,31 +219,29 @@ class ExtractValidator():
                 if k !="document_name":
                     lhs = gt[gt['document_name'] ==
                              gt_document_name][k].values[0]
-                    if k=="Due date":
-                       k="net_terms"
                     lhs_temp = lhs
                     rhs = hit[k]
-
                     lhs, rhs = self.cleanup(lhs, rhs, k)
-
                     if self.isEM(lhs, rhs, k):
                         em += 1
                         label = 'EM'
                     elif self.isNA(lhs, rhs, k):
                         na += 1
                         label = 'NA'
-                    elif self.isPM(lhs, rhs, k):
+
+                    elif self.isPM(lhs, rhs, k)[0]:
                         pm += 1
                         label = 'PM'
+                        _,lhs, rhs = self.isPM(lhs, rhs, k)
                     else:
                         wrong += 1
                         label = 'Wrong'
                     ##for rosumm Due date Validation
-                    if k =="net_terms":
+                    if k =="Due date":
                         if label=="Wrong":
-                            rhs = hit["Due date"]
+                            rhs = hit["Payment terms"]
                         if label !='EM':
-                            lhs, newrhs = self.cleanup(lhs, hit["Due date"], "Due date")
+                            lhs, newrhs = self.cleanup(lhs, rhs, "Payment terms")
                             if self.isEM(lhs, newrhs, "Due date"):
                                 if label=='NA':
                                     na -= 1
@@ -284,24 +251,24 @@ class ExtractValidator():
                                     pm -= 1
                                 em += 1
                                 label = 'EM'
-                                print("EM",document_name, rhs)
+                                
                             
                             if label!="PM":
-                                lhs, newrhs = self.cleanup(lhs, hit["Due date"], "Due date")
-                                if self.isPM(lhs, newrhs, "Due date"):
+                                lhs, newrhs = self.cleanup(lhs, rhs, "Payment terms")
+                                if self.isPM(lhs, newrhs, "Due date")[0]:
                                     if label=='NA':
                                         na -= 1
                                     elif label == 'Wrong':
                                         wrong -= 1  
                                     pm += 1
                                     label = 'PM'
-                                    print("PM",document_name, rhs)
+                                    
                         k = "Due Date"    
 
                     lhs =  lhs_temp  
                     debug_lines.append(self.debug_lines(
                         document_name, k, lhs, rhs))
-                    debug_lines[-1].append("rossum")
+                    debug_lines[-1].append("msfr")
                     debug_lines[-1].append(label)
 
                     logging.debug("Field: {} | gt: {} | answer: {} | label: {}".format(
@@ -335,7 +302,7 @@ def generate_label(score, slabs):
 
 
 def main(locale, knowledge, gt, columns):
-    with open('comparison_script/jsons/config.json') as f:
+    with open('compare/config.json') as f:
         config = json.load(f)
 
     slabs = config["slabs"][locale]
@@ -346,7 +313,7 @@ def main(locale, knowledge, gt, columns):
     ev = ExtractValidator()
     results, debug_lines = ev.run(locale, knowledge, gt, columns)
     file_mode = 'w'
-    with open("comparison_script/jsons/Rossum/debug_lines.csv", file_mode) as csv_file:
+    with open("extraction_result/msfr/debug_lines.csv", file_mode) as csv_file:
         writer = csv.writer(csv_file, delimiter=',')
         if file_mode == "w":
             writer.writerow(['doc', 'field', 'gt', 'answer', 'len_diff', 'p_rt', 'p_tsort_rt',
@@ -355,17 +322,14 @@ def main(locale, knowledge, gt, columns):
 
     df = pd.DataFrame(results, columns=['filename', 'EM', 'PM', 'NA',
                                         'Wrong','OCR_Quality_Mean'])
-
     df['score'] = df.apply(lambda x: generate_score(
         x, weights, min_val, max_val), axis=1)
     df['label'] = df.apply(lambda x: generate_label(x['score'], slabs), axis=1)
-
     return df
 
-
 def run_comparison():
-    gt_file_path = "comparison_script/ground_truth/us_invoice_ground_truth.csv"
-    knowledge_file_path = "comparison_script/jsons/Rossum/result.json"
+    gt_file_path = "ground_truth/invoice_ground_truth.csv"
+    knowledge_file_path = "extraction_result/msfr/result.json"
     columns = [
         'document_name',
         'Invoice Number',
@@ -374,12 +338,9 @@ def run_comparison():
         'Due date',
         'Invoice To',
         'Invoice From'
-        # 'GST',
     ]
 
     gt = pd.read_csv(gt_file_path)[columns]
     knowledge = json.load(open(knowledge_file_path))
-
-    df = main("SG", knowledge, gt, columns)
-
-    df.to_csv("comparison_script/jsons/Rossum/training_data.csv", index=None)
+    df = main("US", knowledge, gt, columns)
+    df.to_csv("extraction_result/msfr/training_data.csv", index=None)

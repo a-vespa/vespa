@@ -1,26 +1,28 @@
-import os
 import json
+import os
 import time
+
+import compare.label_generator_ezzybills as ezzybills_comparator
+import compare.label_generator_msfr as msfr_comparator
+import compare.label_generator_rossum as rossum_comparator
+import compare.label_generator_sypht as sypht_comparator
+import compare.label_generator_vespa as vespa_comparator
+import extractor.ezzybills as ezzybills_extractor
+import extractor.ms_form_recognizer as ms_form_recognizer_extractor
+import extractor.rossum as rossum_extractor
+import extractor.sypht as sypht_extractor
 import requests
-import ezzybills as ezzybillsextraction
-import rossum as rossumextraction
-import sypht as syphtextraction
-import ms_form_recognizer as ms_form_recognizer
-import extraction_comparison.label_generator_ezzybills as ezzybills
-import extraction_comparison.label_generator_rossum as rossum
-import extraction_comparison.label_generator_sypht as sypht
-import extraction_comparison.label_generator_vespa as vespa
-import extraction_comparison.label_generator_msfr as msfr
+
 if __name__ == "__main__":
-    path= "/mnt/d/R&D/Project/Vespa Benchmark/Invoice/ALL/"
-    for r ,d ,f in os.walk(path):
+    path = "../../Datasets/Invoices/"
+    for r, d, f in os.walk(path):
         for file in f:
-            ezzybillsextraction.get_extraction_details(r, file)
-            rossumextraction.get_extraction_details(r, file)
-            syphtextraction.get_extraction_details(r, file)
-            ms_form_recognizer.extract_invocie_details(r, file)
-    rossum.run_comparison()
-    ezzybills.run_comparison()
-    sypht.run_comparison()
-    vespa.run_comparison()
-    msfr.run_comparison()
+            ezzybills_extractor.get_extraction_details(r, file)
+            rossum_extractor.get_extraction_details(r, file)
+            sypht_extractor.get_extraction_details(r, file)
+            ms_form_recognizer_extractor.extract_invocie_details(r, file)
+    rossum_comparator.run_comparison()
+    ezzybills_comparator.run_comparison()
+    sypht_comparator.run_comparison()
+    vespa_comparator.run_comparison()
+    msfr_comparator.run_comparison()

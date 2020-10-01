@@ -6,12 +6,12 @@ payload = {}
 
 def get_extraction_details(filepath ,file):
     try:
-        print(file)
         start_time = time.time()
         url = "https://api.elis.rossum.ai/v1/queues/34281/upload"
+        token = 'token a94ff2e6994a8d09661cb5dcc555e0911943a56d'
         headers = {
             'Accept' : 'application/json',
-            'Authorization' : 'token a94ff2e6994a8d09661cb5dcc555e0911943a56d'}
+            'Authorization' : token}
         files = {'content' : open(os.path.join(filepath,file) ,'rb')}
         response = requests.request('POST' , url, headers=headers,data=payload , files=files, allow_redirects=False ,verify=False)
         json_data = json.loads(response.text)
@@ -19,7 +19,7 @@ def get_extraction_details(filepath ,file):
         while is_reviewed==False:
             statusurl = json_data["annotation"]
             headers = {
-            'Authorization' : 'token a94ff2e6994a8d09661cb5dcc555e0911943a56d'}
+            'Authorization' : token}
             response1 = requests.get(statusurl, headers=headers, allow_redirects=False ,verify=False)
             status_json = json.loads(response1.text)
             if status_json["status"] == "to_review":
@@ -66,10 +66,10 @@ def get_extraction_details(filepath ,file):
                             elif j["schema_id"] == "recipient_name":
                                 item["Invoice To"] = j["value"]       
 
-                with open('comparison_script/jsons/Rossum/result.json', 'r') as outfile:
+                with open('extraction_result/rossum/result.json', 'r') as outfile:
                         rossum_extraction = json.load(outfile)
                         rossum_extraction.append(item)
-                with open('comparison_script/jsons/Rossum/result.json' , 'w') as json_file:
+                with open('extraction_result/rossum/result.json' , 'w') as json_file:
                     json.dump(rossum_extraction , json_file) 
 
     except:

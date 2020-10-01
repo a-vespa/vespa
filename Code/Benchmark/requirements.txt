@@ -1,0 +1,7 @@
+jsonnet==0.14.0
+jsonschema==3.1.1
+requests==2.22.0
+responses==0.10.6
+moment==0.10
+pandas==0.23.4
+fuzzywuzzy==0.18.0

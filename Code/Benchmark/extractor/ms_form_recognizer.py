@@ -92,18 +92,18 @@ def extract_invocie_details(filepath, file):
                                 keyvalueitem["Total Amount"]= "NA"
                         keyvalueitem["document name"] = file
                         keyvalueitem["exreaction_time"] = time.time() - start_time
-                    with open('fr_result.json', 'r') as outfile:
+                    with open('extraction_result/msfr/fr_result.json', 'r') as outfile:
                         fr_extraction = json.load(outfile)
                         fr_extraction.append(resp_json)
 
-                    with open('fr_result.json', 'w') as outfile:
+                    with open('extraction_result/msfr/fr_result.json', 'w') as outfile:
                         json.dump(fr_extraction, outfile)
 
-                    with open('field_wise_result.json' , 'r') as json_file:
+                    with open('extraction_result/msfr/result.json' , 'r') as json_file:
                         field_wise_extraction = json.load(json_file)
                         field_wise_extraction.append(keyvalueitem)
 
-                    with open('field_wise_result.json', 'w') as outfile:
+                    with open('extraction_result/msfr/result.json', 'w') as outfile:
                         json.dump(field_wise_extraction, outfile)
 
                     print("Analysis succeeded:\n")

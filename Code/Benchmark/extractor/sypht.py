@@ -40,11 +40,11 @@ def get_extraction_details(filepath, file):
                     elif i["name"]=="document.referenceNo":
                         item["Invoice Number"]= i["value"]
                 
-                with open('comparison_script/jsons/Sypht/result.json', 'r') as readfile:
+                with open('extraction_result/sypht/result.json', 'r') as readfile:
                     sypht_extraction = json.load(readfile)
                     sypht_extraction.append(item)
                 
-                with open('comparison_script/jsons/Sypht/result.json', 'w') as outfile:
+                with open('extraction_result/sypht/result.json', 'w') as outfile:
                     json.dump(sypht_extraction, outfile)
 
     except:

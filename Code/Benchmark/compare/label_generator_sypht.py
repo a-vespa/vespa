@@ -2,12 +2,13 @@ import csv
 import json
 import logging
 import re
-
+import moment 
 import pandas as pd
 from fuzzywuzzy import fuzz
+import datetime
 
-
-logging.basicConfig(filename="extract_validator.log",
+LOCALE= "US"
+logging.basicConfig(filename="extraction_result/sypht/extract_validator.log",
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                     datefmt='%H:%M:%S',
@@ -51,92 +52,118 @@ class ExtractValidator():
     def is_tax(self, field):
         return True if field.lower() in ['late payment charges', 'gst'] else False
 
-    def cleanup(self, gt, answers, field):
+    def cleanup(self, gt, answer, field):
         if self.is_date(field):
-            gt = re.sub("[\/\-\.]", " ", gt)
-            answers = [re.sub("[\/\-\.]", " ", answer) for answer in answers]
-            if field =="Due date":
-                due_date_net_expression = r"\bnet\s+\d+"
-                due_date_net_proxy = "{} days"
-                net_matches = re.findall(due_date_net_expression, gt, flags=re.IGNORECASE)
-                if any(net_matches):
-                    gt = due_date_net_proxy.format(re.findall(r"\d+", net_matches[0])[0])
+            if gt.lower().find('days') == -1:
+                if LOCALE =="SG":
+                    if re.match("^\d{1,2}\/\d{1,2}\/\d{4}$", gt):
+                        format_str = '%d/%m/%Y' # The format
+                        datetime_obj = datetime.datetime.strptime(gt, format_str)
+                        gt = str(datetime_obj.date())
+                    elif  re.match("^\d{1,2} \d{1,2} \d{4}$", gt):
+                        format_str = '%d %m %Y' # The format
+                        datetime_obj = datetime.datetime.strptime(gt, format_str)
+                        gt =  str(datetime_obj.date())
+                    elif re.match("^\d{1,2}-\d{1,2}-\d{4}$", gt):
+                        format_str = '%d-%m-%Y' # The format
+                        datetime_obj = datetime.datetime.strptime(gt, format_str)
+                        gt =  str(datetime_obj.date())
+                    elif re.match("^\d{1,2}.\d{1,2}.\d{4}$", gt):
+                        format_str = '%d.%m.%Y' # The format
+                        datetime_obj = datetime.datetime.strptime(gt, format_str)
+                        gt =  str(datetime_obj.date())
+                    else:
+                        try:
+                            dategt = moment.date(gt)
+                            dategt = str(dategt)
+                            gt = dategt[:10]
+                        except:
+                            pass
+                elif LOCALE =="US":
+                    try:
+                        if re.match("^\d{1,2}\/\d{1,2}\/\d{4}$", gt):
+                            format_str = '%m/%d/%Y' # The format
+                            datetime_obj = datetime.datetime.strptime(gt, format_str)
+                            gt = str(datetime_obj.date())
+                        elif  re.match("^\d{1,2} \d{1,2} \d{4}$", gt):
+                            format_str = '%m %d %Y' # The format
+                            datetime_obj = datetime.datetime.strptime(gt, format_str)
+                            gt =  str(datetime_obj.date())
+                        elif re.match("^\d{1,2}-\d{1,2}-\d{4}$", gt):
+                            format_str = '%m-%d-%Y' # The format
+                            datetime_obj = datetime.datetime.strptime(gt, format_str)
+                            gt =  str(datetime_obj.date())
+                        elif re.match("^\d{1,2}.\d{1,2}.\d{4}$", gt):
+                            format_str = '%d.%m.%Y' # The format
+                            datetime_obj = datetime.datetime.strptime(gt, format_str)
+                            gt =  str(datetime_obj.date())
+                        else:
+                            try:
+                                dategt = moment.date(gt)
+                                dategt = str(dategt)
+                                gt = dategt[:10]
+                            except:
+                                pass
+                    except:
+                            dategt = moment.date(gt)
+                            dategt = str(dategt)
+                            gt = dategt[:10]
+                gt, answer = re.sub(
+                    "[\/\-\.]", " ", gt), re.sub("[\/\-\.]", " ", answer)
         elif self.is_amount(field):
-            gt = re.sub("[\$\,]", "", gt)
-            answers = [re.sub("[\$\,]", "", answer) for answer in answers]
+            gt, answer = re.sub("[\$\,]", "", gt), re.sub("[\$\,]", "", answer)
 
-        gt = gt.replace(']','').replace('[','')
-        gt= gt.replace("'," ,"@#@")
-        gts = gt.replace("'",'').split("@#@")
-        return [gt.lower().strip()  for gt in gts], [answer.lower().strip() for answer in answers]
+        return gt.lower().strip(), answer.lower().strip()
 
-    def isEM(self, gts, answers, field):
-        for gt in gts:
-            for answer in answers:
-                if self.is_date(field):
-                    if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
-                        return True,gt, answer
-                elif self.is_amount(field):
-                    if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
-                        return True,gt, answer
-                else:
-                    if fuzz.token_sort_ratio(gt, answer) >= 90 or (answer == "na" and gt == ""):
-                        return True,gt, answer
-        return False,gts, None
+    def isEM(self, gt, answer, field):
+        if self.is_date(field):
+            if (gt==answer) or (answer == "na" and gt == ""):
+                return True
+        elif self.is_amount(field):
+            if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
+                return True
+        else:
+            if fuzz.token_sort_ratio(gt, answer) >= 90 or (answer == "na" and gt == ""):
+                return True
+        return False
 
-    def isNA(self, gts, answers, field):
-        for gt in gts:
-            for answer in answers:
-                if answer == "na" and len(answers) == 1:
-                    return True,gt, answer
-        return False,gts, None
+    def isNA(self, gt, answer, field):
+        if answer == "na":
+            return True
+        return False
 
-    def _isPM(self, gt, answer, field):
+    def isPM(self, gt, answer, field):
         if self.is_date(field):
             if self.len_diff(gt, answer) > 0 and self.partial_score(gt, answer) >= 80:
                 super_str, sub_str = self.max(gt, answer)
                 if not self.is_substr(super_str, sub_str):
-                    return False, 0
-                return True, self.partial_score(gt, answer)
+                    return False
+                return True
 
         elif self.is_amount(field):
             if self.len_diff(gt, answer) > 0 and self.partial_score(gt, answer) >= 70:
                 if len(answer) > len(gt) and gt == "0":
-                    return False, 0
+                    return False
                 elif len(answer) > len(gt) and self.is_substr(answer, "{:.2f}".format(float(gt))):
-                    return True, self.partial_score(gt, answer)
+                    return True
                 elif len(gt) > len(answer) and str(int(float(gt))) == answer:
-                    return True, self.partial_score(gt, answer)
-                return False, 0
+                    return True
+                return False
             else:
-                return False, 0
+                return False
 
         elif self.is_tax(field):
             if self.len_diff(gt, answer) > 0 and self.partial_score(gt, answer) >= 70:
                 if len(answer) > len(gt) and self.is_substr(answer, gt):
-                    return True, self.partial_score(gt, answer)
-                return False, 0
+                    return True
+                return False
             else:
-                return False, 0
+                return False
 
         else:
             if fuzz.token_sort_ratio(gt, answer) < 90 and self.partial_score(gt, answer) > 60:
-                return True, self.partial_score(gt, answer)
-        
-        return False, 0
-
-    def isPM(self, gts, answers, field):
-        p_answer = None
-        p_score = 0
-        gt_value=None
-        for gt in gts:
-            for answer in answers:
-                status, score = self._isPM(gt, answer, field)
-                if status is True and score > p_score:
-                    p_answer = answer
-                    p_score = score
-                    gt_value = gt
-        return False if p_answer is None else True,gt_value, p_answer
+                return True
+        return False
 
     def isWRONG(self, gt, answer, field):
         if self.is_date(field):
@@ -187,14 +214,14 @@ class ExtractValidator():
 
         return gt_document_name
 
-    def run(self, locale, knowledge, master, gt, columns):
+    def run(self, locale, knowledge, gt, columns):
 
         gt.fillna("", inplace=True)
         results = []
         debug_lines = []
 
-        for hit in filter(lambda x: x['_source']['locale'] == locale, knowledge['hits']['hits']):
-            document_name = hit['_source']['document_name']
+        for hit in knowledge:
+            document_name = hit['document_name']
 
             gt_document_name = self.gt_doc_name(document_name, gt)
 
@@ -214,55 +241,50 @@ class ExtractValidator():
             na = 0  # NA
             pm = 0  # Partial match
             wrong = 0  # Wrong answer
-            ocr_quality = self.get_ocr_quality(document_name, master)
+            ocr_quality = 0
 
-            for k in hit['_source']['data']:
-                if k['field'] in columns:
 
+            for k in columns:
+                if k !="document_name":
                     lhs = gt[gt['document_name'] ==
-                             gt_document_name][k['field']].values[0]
-                    # rhs = k['ranswer']
-                    rhs = [c['ranswer'] for c in k['candidates']]
-                    
-                    lhs, rhs = self.cleanup(lhs, rhs, k['field'])
+                             gt_document_name][k].values[0]
 
-                    if self.isEM(lhs, rhs, k['field'])[0]:
+                    lhs_temp = lhs
+                    rhs = hit[k]
+
+                    lhs, rhs = self.cleanup(lhs, rhs, k)
+
+                    if self.isEM(lhs, rhs, k):
                         em += 1
                         label = 'EM'
-                        _,lhs, rhs = self.isEM(lhs, rhs, k['field'])
-                    elif self.isNA(lhs, rhs, k['field'])[0]:
+                    elif self.isNA(lhs, rhs, k):
                         na += 1
                         label = 'NA'
-                        _,lhs, rhs = self.isNA(lhs, rhs, k['field'])
-                    elif self.isPM(lhs, rhs, k['field'])[0]:
+                    elif self.isPM(lhs, rhs, k):
                         pm += 1
                         label = 'PM'
-                        _,lhs, rhs = self.isPM(lhs, rhs, k['field'])
                     else:
                         wrong += 1
                         label = 'Wrong'
-                        rhs = rhs[0]
-
-
-                    logging.debug("Field: {} | gt: {} | answer: {} | label: {}".format(
-                        k['field'], lhs, rhs, label))
-
+                    lhs = gt[gt['document_name'] ==
+                             gt_document_name][k].values[0]
                     debug_lines.append(self.debug_lines(
-                        document_name, k['field'], lhs, rhs))
-                    debug_lines[-1].append(k['updated_by'])
+                        document_name, k, lhs, rhs))
+                    debug_lines[-1].append("Sypht")
                     debug_lines[-1].append(label)
 
+                    logging.debug("Field: {} | gt: {} | answer: {} | label: {}".format(
+                        k, lhs, rhs, label))
+
             logging.info("="*71)
-            logging.info("EM: {} | PM: {} | NA: {} | Wrong: {} | OCR: {}".format(
-                em, pm, na, wrong, ocr_quality))
-            logging.info("="*71)
-            results.append([document_name, em, pm, na, wrong, ocr_quality])
+            results.append([document_name, em, pm, na, wrong,ocr_quality])
 
         return results, debug_lines
 
+
 def generate_score(x, weights, min_val, max_val):
     """
-    This function calculates a weighted score and 
+    This function calculates a weighted score and
     do min max scaling on the score
     """
     score = x['EM'] * weights['EM'] - \
@@ -281,8 +303,8 @@ def generate_label(score, slabs):
             return slab["label"]
 
 
-def main(locale, knowledge, master, gt, columns):
-    with open('comparison_script/jsons/config.json') as f:
+def main(locale, knowledge, gt, columns):
+    with open('compare/config.json') as f:
         config = json.load(f)
 
     slabs = config["slabs"][locale]
@@ -291,9 +313,9 @@ def main(locale, knowledge, master, gt, columns):
     max_val = config["max"][locale]
 
     ev = ExtractValidator()
-    results, debug_lines = ev.run(locale, knowledge, master, gt, columns)
+    results, debug_lines = ev.run(locale, knowledge, gt, columns)
     file_mode = 'w'
-    with open("comparison_script/jsons/Ezzybill/debug_lines.csv", file_mode) as csv_file:
+    with open("extraction_result/sypht/debug_lines.csv", file_mode) as csv_file:
         writer = csv.writer(csv_file, delimiter=',')
         if file_mode == "w":
             writer.writerow(['doc', 'field', 'gt', 'answer', 'len_diff', 'p_rt', 'p_tsort_rt',
@@ -301,7 +323,7 @@ def main(locale, knowledge, master, gt, columns):
         writer.writerows(debug_lines)
 
     df = pd.DataFrame(results, columns=['filename', 'EM', 'PM', 'NA',
-                                        'Wrong', 'OCR_Quality_Mean'])
+                                        'Wrong' ,'OCR_Quality_Mean'])
 
     df['score'] = df.apply(lambda x: generate_score(
         x, weights, min_val, max_val), axis=1)
@@ -311,22 +333,17 @@ def main(locale, knowledge, master, gt, columns):
 
 
 def run_comparison():
-    gt_file_path = "comparison_script/ground_truth/us_invoice_ground_truth.csv"
-    knowledge_file_path = "comparison_script/jsons/vespa/knowledgeidx.json"
-    master_file_path = "comparison_script/jsons/vespa/masteridx.json"
-    
+    gt_file_path = "ground_truth/invoice_ground_truth.csv"
+    knowledge_file_path = "extraction_result/sypht/result.json"
     columns = [
         'document_name',
-        'Invoice Number', 
-        'Invoice From',
-        'Invoice To', 
+        'Invoice Number',
         'Total Amount',
-        'Invoice Date', 
-        'Due date'
+        'Invoice Date',
+        'Due date',
     ]
 
     gt = pd.read_csv(gt_file_path)[columns]
     knowledge = json.load(open(knowledge_file_path))
-    master = json.load(open(master_file_path))
-    df = main("US", knowledge, master, gt, columns)
-    df.to_csv("comparison_script/jsons/Ezzybill/training_data.csv", index=None)
+    df = main("SG", knowledge, gt, columns)
+    df.to_csv("extraction_result/sypht/training_data.csv", index=None)

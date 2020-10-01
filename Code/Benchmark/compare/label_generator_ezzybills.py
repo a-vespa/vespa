@@ -6,9 +6,9 @@ import moment
 import pandas as pd
 from fuzzywuzzy import fuzz
 import datetime
-
+from decimal import Decimal
 LOCALE= "US"
-logging.basicConfig(filename="extract_validator.log",
+logging.basicConfig(filename="extraction_result/ezzybill/extract_validator.log",
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                     datefmt='%H:%M:%S',
@@ -111,12 +111,22 @@ class ExtractValidator():
                 gt, answer = re.sub(
                     "[\/\-\.]", " ", gt), re.sub("[\/\-\.]", " ", answer)
         elif self.is_amount(field):
-            gt, answer = re.sub("[\$\,]", "", gt), re.sub("[\$\,]", "", answer)
+
+            gt, answer = re.sub("[\$\,]", "", gt), re.sub("[\$\,]", "", str(answer))
+            gt = float(gt)
+            answer = float(answer)
+            d1 = Decimal (gt)
+            d2 = Decimal (answer)
+            gt = round(d1, 2)
+            answer = round(d2, 2)
+            gt = str(gt)
+            answer = str(answer)
 
         return gt.lower().strip(), answer.lower().strip()
 
     def isEM(self, gt, answer, field):
         if self.is_date(field):
+            #if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
             if (gt==answer) or (answer == "na" and gt == ""):
                 return True
         elif self.is_amount(field):
@@ -248,7 +258,6 @@ class ExtractValidator():
                 if k !="document_name":
                     lhs = gt[gt['document_name'] ==
                              gt_document_name][k].values[0]
-
                     lhs_temp = lhs
                     rhs = hit[k]
 
@@ -270,7 +279,7 @@ class ExtractValidator():
                              gt_document_name][k].values[0]
                     debug_lines.append(self.debug_lines(
                         document_name, k, lhs, rhs))
-                    debug_lines[-1].append("Sypht")
+                    debug_lines[-1].append("Ezzybills")
                     debug_lines[-1].append(label)
 
                     logging.debug("Field: {} | gt: {} | answer: {} | label: {}".format(
@@ -304,7 +313,7 @@ def generate_label(score, slabs):
 
 
 def main(locale, knowledge, gt, columns):
-    with open('comparison_script/jsons/config.json') as f:
+    with open('compare/config.json') as f:
         config = json.load(f)
 
     slabs = config["slabs"][locale]
@@ -315,7 +324,7 @@ def main(locale, knowledge, gt, columns):
     ev = ExtractValidator()
     results, debug_lines = ev.run(locale, knowledge, gt, columns)
     file_mode = 'w'
-    with open("comparison_script/jsons/Ezzybill/debug_lines.csv", file_mode) as csv_file:
+    with open("extraction_result/ezzybill/debug_lines.csv", file_mode) as csv_file:
         writer = csv.writer(csv_file, delimiter=',')
         if file_mode == "w":
             writer.writerow(['doc', 'field', 'gt', 'answer', 'len_diff', 'p_rt', 'p_tsort_rt',
@@ -331,19 +340,19 @@ def main(locale, knowledge, gt, columns):
 
     return df
 
-
 def run_comparison():
-    gt_file_path = "comparison_script/ground_truth/dbs_invoice_ground_truth.csv"
-    knowledge_file_path = "comparison_script/jsons/Sypht/result.json"
+    gt_file_path = "ground_truth/invoice_ground_truth.csv"
+    knowledge_file_path = "extraction_result/ezzybill/result.json"
     columns = [
         'document_name',
         'Invoice Number',
         'Total Amount',
         'Invoice Date',
         'Due date',
+        'Invoice From'
     ]
 
     gt = pd.read_csv(gt_file_path)[columns]
     knowledge = json.load(open(knowledge_file_path))
     df = main("SG", knowledge, gt, columns)
-    df.to_csv("comparison_script/jsons/Ezzybill/training_data.csv", index=None)
+    df.to_csv("extraction_result/ezzybill/training_data.csv", index=None)

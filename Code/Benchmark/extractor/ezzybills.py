@@ -7,6 +7,7 @@ import os
 import time
 from datetime import datetime
 url = 'https://app.ezzydoc.com/EzzyService.svc/Rest'
+
 api_key = {'APIKey': ''}
 payload = {'user': '', 'pwd': '', 'APIKey': ''}
 
@@ -69,11 +70,11 @@ def get_extraction_details(filepath , file):
         ezzebill_item["Invoice Number"] =  invoice_data["invoiceForm"]["invoiceNumber"]
         ezzebill_item["document_name"] =  invoice_data["filename"]
 
-        with open('comparison_script/jsons/Ezzybill/result.json', 'r') as outfile:
+        with open('extraction_result/ezzybill/result.json', 'r') as outfile:
             ezzybill_extraction = json.load(outfile)
             ezzybill_extraction.append(ezzebill_item)
 
-        with open('comparison_script/jsons/Ezzybill/result.json', 'w') as outfile:
+        with open('extraction_result/ezzybill/result.json', 'w') as outfile:
             json.dump(ezzybill_extraction, outfile)
     except:
         pass
