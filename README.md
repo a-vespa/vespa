@@ -10,7 +10,8 @@ We demonstrate the effectiveness of our system by evaluating on a closed corpus 
 
 (2) Our framework generalizes well on non-form-based documents like legal contracts and format-less documents like annual reports with **Avg. F1 of 81.2 and 86.42 respectively**
 
-(3) Our class-aware QA ensemble with diverse network architectures outperforms single QA models.
+(3) Our class-aware QA ensemble (Avg. F1 87.50)  with diverse network architectures outperforms single QA models (Avg. F1 82.67).
+
 
 
 ## [Benchmarking](Code/Benchmark)
