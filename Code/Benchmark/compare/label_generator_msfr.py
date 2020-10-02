@@ -2,12 +2,12 @@ import csv
 import json
 import logging
 import re
-import moment 
+import moment
 import pandas as pd
 from fuzzywuzzy import fuzz
 import datetime
 
-LOCALE= "US"
+LOCALE = "US"
 logging.basicConfig(filename="extract_validator.log",
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
@@ -53,10 +53,10 @@ class ExtractValidator():
         return True if field.lower() in ['late payment charges', 'gst'] else False
 
     def cleanup(self, gt, answer, field):
-        if field!="Payment terms":
-            gt = gt.replace(']','').replace('[','')
-            gt= gt.replace("'," ,"@#@")
-            gts = gt.replace("'",'').split("@#@")
+        if field != "Payment terms":
+            gt = gt.replace(']', '').replace('[', '')
+            gt = gt.replace("',", "@#@")
+            gts = gt.replace("'", '').split("@#@")
         else:
             gts = gt
         if self.is_date(field):
@@ -67,14 +67,14 @@ class ExtractValidator():
         elif self.is_amount(field):
             gts = [re.sub("[\$\,]", "", gt) for gt in gts]
             answer = re.sub("[\$\,]", "", str(answer))
-        
-        return [gt.lower().strip()  for gt in gts], answer.lower().strip()
+
+        return [gt.lower().strip() for gt in gts], answer.lower().strip()
 
     def isEM(self, gts, answer, field):
         for gt in gts:
             if self.is_date(field):
-                #if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
-                if (gt==answer) or (answer == "na" and gt == ""):
+                # if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
+                if (gt == answer) or (answer == "na" and gt == ""):
                     return True
             elif self.is_amount(field):
                 if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
@@ -92,7 +92,7 @@ class ExtractValidator():
 
     def _isPM(self, gt, answer, field):
 
-        if self.is_date(field):  
+        if self.is_date(field):
             if self.len_diff(gt, answer) > 0 and self.partial_score(gt, answer) >= 80:
                 super_str, sub_str = self.max(gt, answer)
                 if not self.is_substr(super_str, sub_str):
@@ -127,14 +127,14 @@ class ExtractValidator():
     def isPM(self, gts, answer, field):
         p_answer = None
         p_score = 0
-        gt_value=None
+        gt_value = None
         for gt in gts:
             status, score = self._isPM(gt, answer, field)
             if status is True and score > p_score:
                 p_answer = answer
                 p_score = score
                 gt_value = gt
-        return False if p_answer is None else True,gt_value, p_answer
+        return False if p_answer is None else True, gt_value, p_answer
 
     def isWRONG(self, gt, answer, field):
         if self.is_date(field):
@@ -214,9 +214,8 @@ class ExtractValidator():
             wrong = 0  # Wrong answer
             ocr_quality = 0
 
-
             for k in columns:
-                if k !="document_name":
+                if k != "document_name":
                     lhs = gt[gt['document_name'] ==
                              gt_document_name][k].values[0]
                     lhs_temp = lhs
@@ -232,18 +231,19 @@ class ExtractValidator():
                     elif self.isPM(lhs, rhs, k)[0]:
                         pm += 1
                         label = 'PM'
-                        _,lhs, rhs = self.isPM(lhs, rhs, k)
+                        _, lhs, rhs = self.isPM(lhs, rhs, k)
                     else:
                         wrong += 1
                         label = 'Wrong'
-                    ##for rosumm Due date Validation
-                    if k =="Due date":
-                        if label=="Wrong":
+                    # for rosumm Due date Validation
+                    if k == "Due date":
+                        if label == "Wrong":
                             rhs = hit["Payment terms"]
-                        if label !='EM':
-                            lhs, newrhs = self.cleanup(lhs, rhs, "Payment terms")
+                        if label != 'EM':
+                            lhs, newrhs = self.cleanup(
+                                lhs, rhs, "Payment terms")
                             if self.isEM(lhs, newrhs, "Due date"):
-                                if label=='NA':
+                                if label == 'NA':
                                     na -= 1
                                 elif label == 'Wrong':
                                     wrong -= 1
@@ -251,21 +251,21 @@ class ExtractValidator():
                                     pm -= 1
                                 em += 1
                                 label = 'EM'
-                                
-                            
-                            if label!="PM":
-                                lhs, newrhs = self.cleanup(lhs, rhs, "Payment terms")
+
+                            if label != "PM":
+                                lhs, newrhs = self.cleanup(
+                                    lhs, rhs, "Payment terms")
                                 if self.isPM(lhs, newrhs, "Due date")[0]:
-                                    if label=='NA':
+                                    if label == 'NA':
                                         na -= 1
                                     elif label == 'Wrong':
-                                        wrong -= 1  
+                                        wrong -= 1
                                     pm += 1
                                     label = 'PM'
-                                    
-                        k = "Due Date"    
 
-                    lhs =  lhs_temp  
+                        k = "Due Date"
+
+                    lhs = lhs_temp
                     debug_lines.append(self.debug_lines(
                         document_name, k, lhs, rhs))
                     debug_lines[-1].append("msfr")
@@ -275,7 +275,7 @@ class ExtractValidator():
                         k, lhs, rhs, label))
 
             logging.info("="*71)
-            results.append([document_name, em, pm, na, wrong ,ocr_quality])
+            results.append([document_name, em, pm, na, wrong, ocr_quality])
 
         return results, debug_lines
 
@@ -321,11 +321,12 @@ def main(locale, knowledge, gt, columns):
         writer.writerows(debug_lines)
 
     df = pd.DataFrame(results, columns=['filename', 'EM', 'PM', 'NA',
-                                        'Wrong','OCR_Quality_Mean'])
+                                        'Wrong', 'OCR_Quality_Mean'])
     df['score'] = df.apply(lambda x: generate_score(
         x, weights, min_val, max_val), axis=1)
     df['label'] = df.apply(lambda x: generate_label(x['score'], slabs), axis=1)
     return df
+
 
 def run_comparison():
     gt_file_path = "ground_truth/invoice_ground_truth.csv"

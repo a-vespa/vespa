@@ -1,0 +1,283 @@
+doc,field,gt,answer,len_diff,p_rt,p_tsort_rt,p_tset_rt,tsort_rt,tset_rt,origin,label
+29A INTERNATIONAL BUSINESS PARK.pdf,Invoice Number,201820010452,201820010452,0,100,100,100,100,100,rossum,EM
+29A INTERNATIONAL BUSINESS PARK.pdf,Total Amount,137.17,137.17,0,100,100,100,100,100,rossum,EM
+29A INTERNATIONAL BUSINESS PARK.pdf,Invoice Date,15-Apr-2018,2018 04 15,1,57,70,100,67,82,rossum,EM
+29A INTERNATIONAL BUSINESS PARK.pdf,Due Date,['15-May-2018'],2018-05-15,5,50,70,100,67,82,rossum,EM
+29A INTERNATIONAL BUSINESS PARK.pdf,Invoice To,SingTel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,81,100,100,100,100,rossum,EM
+29A INTERNATIONAL BUSINESS PARK.pdf,Invoice From,Digital Singapore Jurong East Pte Ltd,digital singapore jurong east pte ltd,0,84,100,100,100,100,rossum,EM
+31 GUL LANE.pdf,Invoice Number,DNI 1643,,8,0,0,0,0,0,rossum,Wrong
+31 GUL LANE.pdf,Total Amount,"4,943.40",4943.40,1,86,92,100,80,93,rossum,EM
+31 GUL LANE.pdf,Invoice Date,5-Mar-18,2018 03 05,2,25,40,40,22,22,rossum,EM
+31 GUL LANE.pdf,Due Date,['NA'],,6,0,0,0,0,0,rossum,Wrong
+31 GUL LANE.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+31 GUL LANE.pdf,Invoice From,dormakaba Singapore Pte Ltd,singtel mobile singapore pte ltd,5,67,63,100,58,77,rossum,PM
+37 TUAS ROAD.pdf,Invoice Number,150545,150545,0,100,100,100,100,100,rossum,EM
+37 TUAS ROAD.pdf,Total Amount,"3,745.00",3745.00,1,86,86,100,93,93,rossum,EM
+37 TUAS ROAD.pdf,Invoice Date,01-APR-18,2018 04 01,1,33,44,100,53,53,rossum,EM
+37 TUAS ROAD.pdf,Due Date,['NA'],,6,0,0,0,0,0,rossum,Wrong
+37 TUAS ROAD.pdf,Invoice To,Singtel Mobile Singapore,,24,0,0,0,0,0,rossum,Wrong
+37 TUAS ROAD.pdf,Invoice From,OCEAN TANKERS,singtel mobile singapore pte. ltd.,21,8,40,40,27,27,rossum,Wrong
+43 KEPPEL ROAD.pdf,Invoice Number,IN220000081,in220000081,0,82,100,100,100,100,rossum,EM
+43 KEPPEL ROAD.pdf,Total Amount,509.36,509.36,0,100,100,100,100,100,rossum,EM
+43 KEPPEL ROAD.pdf,Invoice Date,28/02/2018,2018 02 28,0,40,100,100,100,100,rossum,EM
+43 KEPPEL ROAD.pdf,Due Date,['28/02/2018'],2018-02-28,4,50,100,100,100,100,rossum,EM
+43 KEPPEL ROAD.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE. LTD.,singtel mobile singapore pte. ltd.,0,18,100,100,100,100,rossum,EM
+43 KEPPEL ROAD.pdf,Invoice From,LHN Space Resources Pte Ltd,lhn space resources pte ltd,0,74,100,100,100,100,rossum,EM
+6 TUAS BAY WALK.pdf,Invoice Number,INV/1804-0027,inv/1804-0027,0,77,100,100,100,100,rossum,EM
+6 TUAS BAY WALK.pdf,Total Amount,698.69,698.69,0,100,100,100,100,100,rossum,EM
+6 TUAS BAY WALK.pdf,Invoice Date,20. April 2018,2018 04 20,4,57,70,100,61,82,rossum,EM
+6 TUAS BAY WALK.pdf,Due Date,['NA'],,6,0,0,0,0,0,rossum,Wrong
+6 TUAS BAY WALK.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+6 TUAS BAY WALK.pdf,Invoice From,Ideal Distribution Pte Ltd,ideal distribution pte ltd,0,85,100,100,100,100,rossum,EM
+66A SUNGEI KADUT ST 1.pdf,Invoice Number,SIV18-01555,siv18-01555,0,73,100,100,100,100,rossum,EM
+66A SUNGEI KADUT ST 1.pdf,Total Amount,"4,708.00",4708.00,1,86,86,100,93,93,rossum,EM
+66A SUNGEI KADUT ST 1.pdf,Invoice Date,03.04.2018,2018 03 04,0,40,100,100,100,100,rossum,Wrong
+66A SUNGEI KADUT ST 1.pdf,Due Date,['7 Days'],net 7 days,0,56,100,100,75,100,rossum,PM
+66A SUNGEI KADUT ST 1.pdf,Invoice To,SingTel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,81,100,100,100,100,rossum,EM
+66A SUNGEI KADUT ST 1.pdf,Invoice From,Sika Singapore Pte Ltd,sika (singapore) pte ltd,2,77,100,100,100,100,rossum,EM
+78 SHENTON WAY.pdf,Invoice Number,CETI201700724,ceti201700724,0,69,100,100,100,100,rossum,EM
+78 SHENTON WAY.pdf,Total Amount,327.18,327.18,0,100,100,100,100,100,rossum,EM
+78 SHENTON WAY.pdf,Invoice Date,10 Nov 2017,2017 11 10,1,57,70,100,67,82,rossum,EM
+78 SHENTON WAY.pdf,Due Date,['24 Nov 2017'],2017-11-24,5,50,70,100,67,82,rossum,EM
+78 SHENTON WAY.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+78 SHENTON WAY.pdf,Invoice From,Charis Electric Pte Ltd,,23,0,0,0,0,0,rossum,Wrong
+BALLOTA PARK.pdf,Invoice Number,,,0,100,100,0,100,0,rossum,EM
+BALLOTA PARK.pdf,Total Amount,"1,605.00",1605.00,1,86,86,100,93,93,rossum,EM
+BALLOTA PARK.pdf,Invoice Date,01/04/2018,2018 01 04,0,40,100,100,100,100,rossum,EM
+BALLOTA PARK.pdf,Due Date,['30 days'],within 30 days from the date of this statement,35,64,71,100,26,100,rossum,PM
+BALLOTA PARK.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,84,100,100,100,100,rossum,EM
+BALLOTA PARK.pdf,Invoice From,MCST PLAN NO. 2635,singtel mobile singapore pte ltd,14,17,29,29,24,24,rossum,Wrong
+GARDENS BY THE BAY.pdf,Invoice Number,181000059,181000059,0,100,100,100,100,100,rossum,EM
+GARDENS BY THE BAY.pdf,Total Amount,"1,615.90",1615.90,1,86,86,100,93,93,rossum,EM
+GARDENS BY THE BAY.pdf,Invoice Date,09.04.2018,2018 09 04,0,40,100,100,100,100,rossum,Wrong
+GARDENS BY THE BAY.pdf,Due Date,['16.04.2018'],2018-04-16,4,50,100,100,100,100,rossum,EM
+GARDENS BY THE BAY.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+GARDENS BY THE BAY.pdf,Invoice From,Gardens by the bay,gardens by the bay,0,94,100,100,100,100,rossum,EM
+GERMAN CENTRE.pdf,Invoice Number,PD2018030684,pd2018030684,0,83,100,100,100,100,rossum,EM
+GERMAN CENTRE.pdf,Total Amount,"2,675.00",2675.00,1,86,86,100,93,93,rossum,EM
+GERMAN CENTRE.pdf,Invoice Date,01.03.2018,2018 01 03,0,40,100,100,100,100,rossum,Wrong
+GERMAN CENTRE.pdf,Due Date,['01.03.2018'],2018-01-03,4,50,100,100,100,100,rossum,EM
+GERMAN CENTRE.pdf,Invoice To,SingTel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,81,100,100,100,100,rossum,EM
+GERMAN CENTRE.pdf,Invoice From,German Centre for Industry Trade Pte Ltd,german centre for industry & trade pte ltd,2,82,100,100,100,100,rossum,EM
+GOLDHILL TOWERS.pdf,Invoice Number,,,0,100,100,0,100,0,rossum,EM
+GOLDHILL TOWERS.pdf,Total Amount,0,,1,0,0,0,0,0,rossum,Wrong
+GOLDHILL TOWERS.pdf,Invoice Date,01/04/2018,2018 01 04,0,40,100,100,100,100,rossum,EM
+GOLDHILL TOWERS.pdf,Due Date,[30/04/2018],2018-04-30,2,53,100,100,100,100,rossum,EM
+GOLDHILL TOWERS.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+GOLDHILL TOWERS.pdf,Invoice From,THE MANAGEMENT CORPORATION S.T. PLAN NO. 025,the management corporation s.t.,13,16,80,100,83,100,rossum,PM
+GRAMERCY PARK.pdf,Invoice Number,,,0,100,100,0,100,0,rossum,EM
+GRAMERCY PARK.pdf,Total Amount,102.83,102.83,0,100,100,100,100,100,rossum,EM
+GRAMERCY PARK.pdf,Invoice Date,01/01/2018,2018 01 01,0,40,100,100,100,100,rossum,EM
+GRAMERCY PARK.pdf,Due Date,['30 days'],,11,0,0,0,0,0,rossum,Wrong
+GRAMERCY PARK.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,84,100,100,100,100,rossum,EM
+GRAMERCY PARK.pdf,Invoice From,THE MANAGEMENT CORPORATION STRATA TITLE PLAN NO. 4454,the management corporation strata titl,15,11,79,100,84,93,rossum,PM
+GREAT WORLD CITY.pdf,Invoice Number,GWR/IV/1712/0210,gwr/iv/1712/0210,0,69,100,100,100,100,rossum,EM
+GREAT WORLD CITY.pdf,Total Amount,1.07,1.07,0,100,100,100,100,100,rossum,EM
+GREAT WORLD CITY.pdf,Invoice Date,14 12 2017,2017 12 14,0,67,100,100,100,100,rossum,EM
+GREAT WORLD CITY.pdf,Due Date,['14 12 2017'],2017-12-14,4,50,100,100,100,100,rossum,EM
+GREAT WORLD CITY.pdf,Invoice To,SingTel Mobile Singapore Pte Ltd,singtel mobile singapore pto ltd,0,78,97,100,97,97,rossum,EM
+GREAT WORLD CITY.pdf,Invoice From,GWC Commercial Pte. Ltd.,gwc commercial pte. ltd.,0,75,100,100,100,100,rossum,EM
+HOTEL BOSS.pdf,Invoice Number,20011368,20011368,0,100,100,100,100,100,rossum,EM
+HOTEL BOSS.pdf,Total Amount,331.39,331.39,0,100,100,100,100,100,rossum,EM
+HOTEL BOSS.pdf,Invoice Date,19-Mar-18 ,2018 03 19,0,30,44,100,42,53,rossum,EM
+HOTEL BOSS.pdf,Due Date,['09-Apr-18'],2018-04-09,3,30,62,100,53,53,rossum,EM
+HOTEL BOSS.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+HOTEL BOSS.pdf,Invoice From, Switch Pte Ltd,switch pte ltd,1,79,100,100,100,100,rossum,EM
+ITE COLLEGE WEST.pdf,Invoice Number,1353,1353,0,100,100,100,100,100,rossum,EM
+ITE COLLEGE WEST.pdf,Total Amount,$414.95,414.95,1,100,100,100,100,100,rossum,EM
+ITE COLLEGE WEST.pdf,Invoice Date,5-Apr-2018,2018 04 05,0,40,57,100,40,60,rossum,EM
+ITE COLLEGE WEST.pdf,Due Date,['19-Apr-2018'],2018-04-19,5,50,70,100,67,82,rossum,EM
+ITE COLLEGE WEST.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+ITE COLLEGE WEST.pdf,Invoice From,C W Services S Pte Ltd - ITE College West,c&w services (s) pte ltd,17,62,95,100,72,100,rossum,PM
+KEMBANGAN PLAZA.pdf,Invoice Number,,,0,100,100,0,100,0,rossum,EM
+KEMBANGAN PLAZA.pdf,Total Amount,"12,000.00",12000.00,1,88,77,100,59,59,rossum,EM
+KEMBANGAN PLAZA.pdf,Invoice Date,"April 1, 2018",2018 04 01,3,57,60,100,55,64,rossum,EM
+KEMBANGAN PLAZA.pdf,Due Date,['30 days'],,11,0,0,0,0,0,rossum,Wrong
+KEMBANGAN PLAZA.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,84,100,100,100,100,rossum,EM
+KEMBANGAN PLAZA.pdf,Invoice From,MCST 1936,the management corporation strata title plan no,38,11,33,33,14,14,rossum,Wrong
+NAFA CAMPUS 1.pdf,Invoice Number,IN000843992,in000843992,0,82,100,100,100,100,rossum,EM
+NAFA CAMPUS 1.pdf,Total Amount,360.35,360.35,0,100,100,100,100,100,rossum,EM
+NAFA CAMPUS 1.pdf,Invoice Date,11 Apr 2018,2018 04 11,1,57,70,100,67,82,rossum,EM
+NAFA CAMPUS 1.pdf,Due Date,['23 Apr 2018'],2018-04-23,5,50,70,100,67,82,rossum,EM
+NAFA CAMPUS 1.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,84,100,100,100,100,rossum,EM
+NAFA CAMPUS 1.pdf,Invoice From,Senoko Energy Supply Pte Ltd,senoko energy supply pte ltd,0,82,100,100,100,100,rossum,EM
+NATIONAL MUSEUM OF SINGAPORE.pdf,Invoice Number,2018-0000026686,2018-0000026686,0,100,100,100,100,100,rossum,EM
+NATIONAL MUSEUM OF SINGAPORE.pdf,Total Amount,183.32,183.32,0,100,100,100,100,100,rossum,EM
+NATIONAL MUSEUM OF SINGAPORE.pdf,Invoice Date,12.04.2018,2018 12 04,0,40,100,100,100,100,rossum,Wrong
+NATIONAL MUSEUM OF SINGAPORE.pdf,Due Date,['12.04.2018'],2018-12-04,4,50,100,100,100,100,rossum,EM
+NATIONAL MUSEUM OF SINGAPORE.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,84,100,100,100,100,rossum,EM
+NATIONAL MUSEUM OF SINGAPORE.pdf,Invoice From,National Heritage Board,national heritage board,0,87,100,100,100,100,rossum,EM
+NGEE ANN POLYTECHNIC.pdf,Invoice Number,V1800061,iv1800061,1,88,100,100,94,94,rossum,EM
+NGEE ANN POLYTECHNIC.pdf,Total Amount,"1,070.00",1070.00,1,86,86,100,80,80,rossum,EM
+NGEE ANN POLYTECHNIC.pdf,Invoice Date,01/05/2018,2018 01 05,0,40,100,100,100,100,rossum,EM
+NGEE ANN POLYTECHNIC.pdf,Due Date,['01/05/2018'],2018-01-05,4,50,100,100,100,100,rossum,EM
+NGEE ANN POLYTECHNIC.pdf,Invoice To,SingTel Mobile Singapore Pte. Ltd.,singtel mobile singapore pte. ltd.,0,82,100,100,100,100,rossum,EM
+NGEE ANN POLYTECHNIC.pdf,Invoice From,Ngee Ann Polytechnic,ngee ann polytechnic,0,85,100,100,100,100,rossum,EM
+NORTH LINK BUILDING.pdf,Invoice Number,060905,060905,0,100,100,100,100,100,rossum,EM
+NORTH LINK BUILDING.pdf,Total Amount,107,107.00,3,100,100,100,67,100,rossum,PM
+NORTH LINK BUILDING.pdf,Invoice Date,01.03.18,2018 01 03,2,62,75,100,89,89,rossum,EM
+NORTH LINK BUILDING.pdf,Due Date,['NA'],,6,0,0,0,0,0,rossum,Wrong
+NORTH LINK BUILDING.pdf,Invoice To,SingTel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,81,100,100,100,100,rossum,EM
+NORTH LINK BUILDING.pdf,Invoice From,THE MANAGEMENT CORPORATION STRATA TITLE PLAN NO. 2757,,53,0,0,0,0,0,rossum,Wrong
+NOVENA SQUARE.pdf,Invoice Number,4000178335,4000178335,0,100,100,100,100,100,rossum,EM
+NOVENA SQUARE.pdf,Total Amount,848.49,848.49,0,100,100,100,100,100,rossum,EM
+NOVENA SQUARE.pdf,Invoice Date,13 Apr 2018,2018 04 13,1,57,70,100,67,82,rossum,EM
+NOVENA SQUARE.pdf,Due Date,['27 Apr 2018'],,15,0,0,0,0,0,rossum,Wrong
+NOVENA SQUARE.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,84,100,100,100,100,rossum,EM
+NOVENA SQUARE.pdf,Invoice From,THE MANAGEMENT CORPORATION STRATA TITLE PLAN NO. 4298,the management corporation strata title,14,10,79,100,86,100,rossum,PM
+OCBC CENTRE SOUTH.pdf,Invoice Number,1050010839,1050010839,0,100,100,100,100,100,rossum,EM
+OCBC CENTRE SOUTH.pdf,Total Amount,"1,605.00",1605.00,1,86,86,100,93,93,rossum,EM
+OCBC CENTRE SOUTH.pdf,Invoice Date,01/04/2018,2018 01 04,0,40,100,100,100,100,rossum,EM
+OCBC CENTRE SOUTH.pdf,Due Date,['NA'],,6,0,0,0,0,0,rossum,Wrong
+OCBC CENTRE SOUTH.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,84,100,100,100,100,rossum,EM
+OCBC CENTRE SOUTH.pdf,Invoice From,OCBC SQUARE PRIVATE LIMITED,ocbc square private limited,0,11,100,100,100,100,rossum,EM
+ODEON TOWERS.pdf,Invoice Number,4000177943,4000177943,0,100,100,100,100,100,rossum,EM
+ODEON TOWERS.pdf,Total Amount,"9,022.81",9022.81,1,86,73,100,53,80,rossum,EM
+ODEON TOWERS.pdf,Invoice Date,31 Mar 2018,2018 03 31,1,57,70,100,67,82,rossum,EM
+ODEON TOWERS.pdf,Due Date,['14 Apr 2018'],2018-04-14,5,50,70,100,67,82,rossum,EM
+ODEON TOWERS.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,,32,0,0,0,0,0,rossum,Wrong
+ODEON TOWERS.pdf,Invoice From,UOL Group Limited,singtel mobile singapore pte ltd,15,29,41,41,29,29,rossum,Wrong
+OEI TIONG HAM PARK.pdf,Invoice Number,132,132,0,100,100,100,100,100,rossum,EM
+OEI TIONG HAM PARK.pdf,Total Amount,32.71,32.71,0,100,100,100,100,100,rossum,EM
+OEI TIONG HAM PARK.pdf,Invoice Date,2/1/2018,2018 02 01,2,50,88,100,89,89,rossum,EM
+OEI TIONG HAM PARK.pdf,Due Date,['2/1/2018'],2018-02-01,2,50,88,100,89,89,rossum,EM
+OEI TIONG HAM PARK.pdf,Invoice To,SingTel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,81,100,100,100,100,rossum,EM
+OEI TIONG HAM PARK.pdf,Invoice From,MCST PLAN NO. 4129,the management corporation strata,15,11,27,27,20,20,rossum,Wrong
+OG BUILDING.pdf,Invoice Number,4000899479,4000899479,0,100,100,100,100,100,rossum,EM
+OG BUILDING.pdf,Total Amount,220.01,220.01,0,100,100,100,100,100,rossum,EM
+OG BUILDING.pdf,Invoice Date,06-04-2018,2018 06 04,0,40,100,100,100,100,rossum,EM
+OG BUILDING.pdf,Due Date,['20-04-2018'],ived from 02-04-2018 may not be reflected,27,64,70,100,27,82,rossum,EM
+OG BUILDING.pdf,Invoice To,Singtel Mobile Singapore Pte. Ltd.,singtel mobile singapore pte. ltd.,0,85,100,100,100,100,rossum,EM
+OG BUILDING.pdf,Invoice From,Tuas Power Supply Pte Ltd,tuas power supply pte ltd is billing on behalf of og private limited,43,80,76,100,54,100,rossum,PM
+OLD HILL STREET POLICE STATION.pdf,Invoice Number,1V/04420/FIN,iv/04420/fin,0,58,75,100,75,92,rossum,PM
+OLD HILL STREET POLICE STATION.pdf,Total Amount,1.07,107,1,67,67,67,57,57,rossum,Wrong
+OLD HILL STREET POLICE STATION.pdf,Invoice Date,16 Apr 2018,2018 04 16,1,57,70,100,67,82,rossum,EM
+OLD HILL STREET POLICE STATION.pdf,Due Date,['30 Days'] ,,12,0,0,0,0,0,rossum,Wrong
+OLD HILL STREET POLICE STATION.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+OLD HILL STREET POLICE STATION.pdf,Invoice From,Ministry of Communications and Information/ag,,45,0,0,0,0,0,rossum,Wrong
+ONE FULLERTON.pdf,Invoice Number,PT18372,,7,0,0,0,0,0,rossum,Wrong
+ONE FULLERTON.pdf,Total Amount,107.00,107.00,0,100,100,100,100,100,rossum,EM
+ONE FULLERTON.pdf,Invoice Date,1-Feb-2018,2018 02 01,0,40,63,100,60,70,rossum,EM
+ONE FULLERTON.pdf,Due Date,['NA'],,6,0,0,0,0,0,rossum,Wrong
+ONE FULLERTON.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+ONE FULLERTON.pdf,Invoice From,PRECIOUS TREASURE PTE LTD,precious treasure pte ltd,0,12,100,100,100,100,rossum,EM
+ONE RAFFLES QUAY.pdf,Invoice Number,00283609,00283609,0,100,100,100,100,100,rossum,EM
+ONE RAFFLES QUAY.pdf,Total Amount,666.57,666.57,0,100,100,100,100,100,rossum,EM
+ONE RAFFLES QUAY.pdf,Invoice Date,16 Apr 2018,2018 04 16,1,57,70,100,67,82,rossum,EM
+ONE RAFFLES QUAY.pdf,Due Date,['30 Apr 2018'],2018-04-30,5,50,70,100,67,82,rossum,EM
+ONE RAFFLES QUAY.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,84,100,100,100,100,rossum,EM
+ONE RAFFLES QUAY.pdf,Invoice From,"Keppel Electric Pte Ltd,",singtel mobile singapore pte ltd,8,39,30,100,25,47,rossum,Wrong
+ONE TREE HILL MANSIONS.pdf,Invoice Number,KFPAM-1804-0037,kfpam-1804-0037,0,67,100,100,100,100,rossum,EM
+ONE TREE HILL MANSIONS.pdf,Total Amount,"1,098.89",1098.89,1,86,71,100,80,80,rossum,EM
+ONE TREE HILL MANSIONS.pdf,Invoice Date,16/4/2018,2018 04 16,1,44,88,100,74,95,rossum,EM
+ONE TREE HILL MANSIONS.pdf,Due Date,['01/05/18'],2018-01-05,2,40,75,100,89,89,rossum,EM
+ONE TREE HILL MANSIONS.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+ONE TREE HILL MANSIONS.pdf,Invoice From,KNIGHT FRANK PAM-COL 3 TRUST ACCOUNT,singtel mobile singapore pte ltd,4,12,27,27,24,24,rossum,Wrong
+OUTWARD BOUND SINGAPORE.pdf,Invoice Number,NYC/17/082,5/3/2018,2,40,38,38,44,44,rossum,Wrong
+OUTWARD BOUND SINGAPORE.pdf,Total Amount,909.5,909.50,1,100,80,100,91,91,rossum,PM
+OUTWARD BOUND SINGAPORE.pdf,Invoice Date,5/3/2018,2018 05 03,2,50,67,100,44,89,rossum,EM
+OUTWARD BOUND SINGAPORE.pdf,Due Date,['30 Days'] ,2018-04-04,2,10,29,29,24,29,rossum,Wrong
+OUTWARD BOUND SINGAPORE.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtal moblle singapore pta ltd,0,75,91,100,91,91,rossum,EM
+OUTWARD BOUND SINGAPORE.pdf,Invoice From,National Youth Council,,22,0,0,0,0,0,rossum,Wrong
+SANDCRAWLER.pdf,Invoice Number,I-18011583,is00029717,0,14,17,17,10,10,rossum,Wrong
+SANDCRAWLER.pdf,Total Amount,290.06,290.06,0,100,100,100,100,100,rossum,EM
+SANDCRAWLER.pdf,Invoice Date,09 Apr 2018,2018 04 09,1,57,70,100,67,82,rossum,EM
+SANDCRAWLER.pdf,Due Date,['19 Apr 2018'],2018-04-19,5,50,70,100,67,82,rossum,EM
+SANDCRAWLER.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd @ the sandcrawler,18,84,75,100,80,100,rossum,PM
+SANDCRAWLER.pdf,Invoice From,PacificLight Energy Pte Ltd,pacificlight energy pte ltd,0,81,100,100,100,100,rossum,EM
+SATCC.pdf,Invoice Number,MM85-93588,,10,0,0,0,0,0,rossum,Wrong
+SATCC.pdf,Total Amount,184.79,184.79,0,100,100,100,100,100,rossum,EM
+SATCC.pdf,Invoice Date,18.04.2018,2018 04 18,0,40,100,100,100,100,rossum,EM
+SATCC.pdf,Due Date,['14/05/2018'],2018-05-14,4,50,100,100,100,100,rossum,EM
+SATCC.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,84,100,100,100,100,rossum,EM
+SATCC.pdf,Invoice From,Civil Aviation Authority of Singapore,,37,0,0,0,0,0,rossum,Wrong
+SENOKO FISHERY PORT.pdf,Invoice Number,18/01/00096/749,18/01/00096/749,0,100,100,100,100,100,rossum,EM
+SENOKO FISHERY PORT.pdf,Total Amount,649.67,649.67,0,100,100,100,100,100,rossum,EM
+SENOKO FISHERY PORT.pdf,Invoice Date,16/01/18,2018 01 16,2,40,75,100,89,89,rossum,EM
+SENOKO FISHERY PORT.pdf,Due Date,['15/02/18'],2018-02-15,2,38,75,100,89,89,rossum,EM
+SENOKO FISHERY PORT.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+SENOKO FISHERY PORT.pdf,Invoice From,CA Facilities Pte Ltd,,21,0,0,0,0,0,rossum,Wrong
+SINGAPORE HANDICRAFTS BUILDING.pdf,Invoice Number,IN330000058,in330000058,0,82,100,100,100,100,rossum,EM
+SINGAPORE HANDICRAFTS BUILDING.pdf,Total Amount,1.070,1070.00,2,80,75,75,50,50,rossum,Wrong
+SINGAPORE HANDICRAFTS BUILDING.pdf,Invoice Date,01/03/2018,2018 01 03,0,40,100,100,100,100,rossum,EM
+SINGAPORE HANDICRAFTS BUILDING.pdf,Due Date,['01/03/2018'],2018-01-03,4,50,100,100,100,100,rossum,EM
+SINGAPORE HANDICRAFTS BUILDING.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE. LTD.,singtel mobile singapore pte. ltd.,0,18,100,100,100,100,rossum,EM
+SINGAPORE HANDICRAFTS BUILDING.pdf,Invoice From,Singapore Handicrafts Pte Ltd,singapore handicrafts pte ltd,0,86,100,100,100,100,rossum,EM
+ST JOHN'S ISLAND.pdf,Invoice Number,2018-3620000002,2018-3620000002,0,100,100,100,100,100,rossum,EM
+ST JOHN'S ISLAND.pdf,Total Amount,"1,498.00",1498.00,1,86,86,100,93,93,rossum,EM
+ST JOHN'S ISLAND.pdf,Invoice Date,01.04.2018,2018 01 04,0,40,100,100,100,100,rossum,Wrong
+ST JOHN'S ISLAND.pdf,Due Date,['01.05.2018'],2018-01-05,4,50,100,100,100,100,rossum,EM
+ST JOHN'S ISLAND.pdf,Invoice To,Singtel Mobile Singapore Pte. Ltd.,,34,0,0,0,0,0,rossum,Wrong
+ST JOHN'S ISLAND.pdf,Invoice From,Agri-Food Veterinary Authority of Singapore,singtel mobile singapore pte. ltd.,9,48,54,100,45,51,rossum,PM
+SUNGEI TENGAH LODGE 514.pdf,Invoice Number,17088966,17088966,0,100,100,100,100,100,rossum,EM
+SUNGEI TENGAH LODGE 514.pdf,Total Amount,"1,573.67",1573.67,1,86,86,100,93,93,rossum,EM
+SUNGEI TENGAH LODGE 514.pdf,Invoice Date, 12 Mar 2018,2018 03 12,2,57,70,100,67,82,rossum,EM
+SUNGEI TENGAH LODGE 514.pdf,Due Date,['26 Mar 18'],2018-03-26,3,30,71,100,53,53,rossum,EM
+SUNGEI TENGAH LODGE 514.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+SUNGEI TENGAH LODGE 514.pdf,Invoice From,RED DOT POWER PTE LTD,singtel mobile singapore pte ltd,11,14,52,100,49,53,rossum,PM
+SUNSTAR BUILDING 1.pdf,Invoice Number,SS-SING-1804,ss-sing-1804,0,50,100,100,100,100,rossum,EM
+SUNSTAR BUILDING 1.pdf,Total Amount,"1,461.11",1461.11,1,86,92,100,80,93,rossum,EM
+SUNSTAR BUILDING 1.pdf,Invoice Date,03-Apr-18,2018 04 03,1,36,44,100,53,53,rossum,EM
+SUNSTAR BUILDING 1.pdf,Due Date,['30 days'],tt remittance within 30 days after receipt of the invoice,46,64,71,100,22,100,rossum,PM
+SUNSTAR BUILDING 1.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,sunstar singapore pte. ltd.,5,58,76,100,74,81,rossum,PM
+SUNSTAR BUILDING 1.pdf,Invoice From,SUNSTAR Singapore Pte. Ltd.,sutstar singapora pre. ltd.,0,56,88,100,88,88,rossum,PM
+SUNTEC CITY.pdf,Invoice Number,MSCZ99-037962,mscz99-037962,0,69,100,100,100,100,rossum,EM
+SUNTEC CITY.pdf,Total Amount,1.07,1.07,0,100,100,100,100,100,rossum,EM
+SUNTEC CITY.pdf,Invoice Date,21/03/2018,2018 03 21,0,40,100,100,100,100,rossum,EM
+SUNTEC CITY.pdf,Due Date,['21/03/2018'],2018-03-21,4,50,100,100,100,100,rossum,EM
+SUNTEC CITY.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,84,100,100,100,100,rossum,EM
+SUNTEC CITY.pdf,Invoice From,THE MANAGEMENT CORPORATION STRATA TITLE PLAN NO. 2197,,53,0,0,0,0,0,rossum,Wrong
+TAMPINES COURT.pdf,Invoice Number,TAM561/2018/03,tam561/2018/03,0,79,100,100,100,100,rossum,EM
+TAMPINES COURT.pdf,Total Amount,"2,407.50",2407.50,1,86,86,100,93,93,rossum,EM
+TAMPINES COURT.pdf,Invoice Date,2018-03-01,2018 03 01,0,80,100,100,100,100,rossum,EM
+TAMPINES COURT.pdf,Due Date,['NA'],,6,0,0,0,0,0,rossum,Wrong
+TAMPINES COURT.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,84,100,100,100,100,rossum,EM
+TAMPINES COURT.pdf,Invoice From,MANAGEMENT CORPORATION STRATA TITLE PLAN NO. 2644,singtel mobile singapore pte ltd,17,12,31,31,25,25,rossum,Wrong
+TANGLIN MALL.pdf,Invoice Number,TM/IV/1712/285,tm/iv/1712/285,0,71,100,100,100,100,rossum,EM
+TANGLIN MALL.pdf,Total Amount,1.07,1.07,0,100,100,100,100,100,rossum,EM
+TANGLIN MALL.pdf,Invoice Date,29 Dec 2017,2017 12 29,1,57,70,100,67,82,rossum,EM
+TANGLIN MALL.pdf,Due Date,['29 Dec 2017'],2017-12-29,5,50,70,100,67,82,rossum,EM
+TANGLIN MALL.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+TANGLIN MALL.pdf,Invoice From,Cuscaden Properties Pte Ltd,cuscaden properties pte ltd,0,85,100,100,100,100,rossum,EM
+THE CLAREMONT.pdf,Invoice Number,CLAO01/18,cla01/18,1,62,88,100,94,94,rossum,EM
+THE CLAREMONT.pdf,Total Amount,$1658.50,1550.00,1,57,73,73,57,57,rossum,Wrong
+THE CLAREMONT.pdf,Invoice Date,02 01 2018,2018 02 01,0,67,100,100,100,100,rossum,EM
+THE CLAREMONT.pdf,Due Date,['NA'],,6,0,0,0,0,0,rossum,Wrong
+THE CLAREMONT.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,singtel mobile singapore pte ltd,0,12,100,100,100,100,rossum,EM
+THE CLAREMONT.pdf,Invoice From,The Claremont Pte Ltd,the claremont pte ltd,0,81,100,100,100,100,rossum,EM
+THE FULLERTON BAY HOTEL.pdf,Invoice Number,PQ18213,pq18213,0,71,100,100,100,100,rossum,EM
+THE FULLERTON BAY HOTEL.pdf,Total Amount,"1,926.00",1926.00,1,86,86,100,93,93,rossum,EM
+THE FULLERTON BAY HOTEL.pdf,Invoice Date,1-Feb-2018,2018 02 01,0,40,63,100,60,70,rossum,EM
+THE FULLERTON BAY HOTEL.pdf,Due Date,['NA'],,6,0,0,0,0,0,rossum,Wrong
+THE FULLERTON BAY HOTEL.pdf,Invoice To,SingTel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,81,100,100,100,100,rossum,EM
+THE FULLERTON BAY HOTEL.pdf,Invoice From,Fullerton Bay Hotel,,19,0,0,0,0,0,rossum,Wrong
+THE FULLERTON HOTEL.pdf,Invoice Number,PT18370,,7,0,0,0,0,0,rossum,Wrong
+THE FULLERTON HOTEL.pdf,Total Amount,"4,173.00",4173.00,1,86,86,100,80,80,rossum,EM
+THE FULLERTON HOTEL.pdf,Invoice Date,1-Feb-2018,2018 02 01,0,40,63,100,60,70,rossum,EM
+THE FULLERTON HOTEL.pdf,Due Date,['NA'],,6,0,0,0,0,0,rossum,Wrong
+THE FULLERTON HOTEL.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,84,100,100,100,100,rossum,EM
+THE FULLERTON HOTEL.pdf,Invoice From,THE FULLERTON HOTEL ,the fullerton singapore,3,10,63,100,76,81,rossum,PM
+THE SIXTH AVENUE RESIDENCES.pdf,Invoice Number,,,0,100,100,0,100,0,rossum,EM
+THE SIXTH AVENUE RESIDENCES.pdf,Total Amount,"2,471.70",2471.70,1,86,86,100,93,93,rossum,EM
+THE SIXTH AVENUE RESIDENCES.pdf,Invoice Date,01/04/2018,2018 01 04,0,40,100,100,100,100,rossum,EM
+THE SIXTH AVENUE RESIDENCES.pdf,Due Date,['30 days'],2018-01-04,1,11,29,29,24,24,rossum,Wrong
+THE SIXTH AVENUE RESIDENCES.pdf,Invoice To,SINGTEL MOBILE SINGAPORE PTE LTD,,32,0,0,0,0,0,rossum,Wrong
+THE SIXTH AVENUE RESIDENCES.pdf,Invoice From,THE MANAGEMENT CORPORATION S T PLAN NO. 3530,the management corporation s t pla,10,15,88,100,88,94,rossum,PM
+THYE SHAN BUILDING.pdf,Invoice Number,20180418,20180418,0,100,100,100,100,100,rossum,EM
+THYE SHAN BUILDING.pdf,Total Amount,"$4,280.00",4280.00,2,86,86,100,80,80,rossum,EM
+THYE SHAN BUILDING.pdf,Invoice Date,16-04-18,2018 04 16,2,40,75,100,89,89,rossum,EM
+THYE SHAN BUILDING.pdf,Due Date,['NA'],,6,0,0,0,0,0,rossum,Wrong
+THYE SHAN BUILDING.pdf,Invoice To,SingTel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,81,100,100,100,100,rossum,EM
+THYE SHAN BUILDING.pdf,Invoice From,Thye Cheong Realty Pte Ltd,thye cheong realty pte ltd,0,81,100,100,100,100,rossum,EM
+SEAVIEW POINT.pdf,Invoice Number,,,0,100,100,0,100,0,rossum,EM
+SEAVIEW POINT.pdf,Total Amount,0.00,0.00,0,100,100,100,100,100,rossum,EM
+SEAVIEW POINT.pdf,Invoice Date,1/4/2018,2018 01 04,2,50,71,100,67,89,rossum,EM
+SEAVIEW POINT.pdf,Due Date,['14 days'],2018-02-28,1,10,33,33,24,24,rossum,Wrong
+SEAVIEW POINT.pdf,Invoice To,Singtel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,84,100,100,100,100,rossum,EM
+SEAVIEW POINT.pdf,Invoice From,MCST 1903,c/o propmag management services pte ltd,30,11,33,33,17,17,rossum,Wrong
+SLF BUILDING.pdf,Invoice Number,0318/20,0318/20,0,100,100,100,100,100,rossum,EM
+SLF BUILDING.pdf,Total Amount,"1,605.00",1605.00,1,86,86,100,93,93,rossum,EM
+SLF BUILDING.pdf,Invoice Date,22/03/2018,2018 03 22,0,40,100,100,100,100,rossum,EM
+SLF BUILDING.pdf,Due Date,['30 DAYS'],30 days,4,43,100,100,100,100,rossum,EM
+SLF BUILDING.pdf,Invoice To,SingTel Mobile Singapore Pte Ltd,singtel mobile singapore pte ltd,0,81,100,100,100,100,rossum,EM
+SLF BUILDING.pdf,Invoice From,MCST PLAN NO 1334,,17,0,0,0,0,0,rossum,Wrong

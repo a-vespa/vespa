@@ -8,7 +8,8 @@ import time
 # Endpoint URL
 endpoint = "https://benchmarking-invoice-extraction.cognitiveservices.azure.com/"
 model_id = "ccdc72bf-86ef-45f4-a4e5-cf74a489b234"
-post_url = endpoint + "/formrecognizer/v2.0/custom/models/ccdc72bf-86ef-45f4-a4e5-cf74a489b234/analyze"
+post_url = endpoint + \
+    "/formrecognizer/v2.0/custom/models/ccdc72bf-86ef-45f4-a4e5-cf74a489b234/analyze"
 apim_key = "d060ca60439f4b639b29be634ee356a3"
 
 params = {
@@ -21,13 +22,15 @@ headers = {
     'Ocp-Apim-Subscription-Key': apim_key,
 }
 
+
 def extract_invocie_details(filepath, file):
-    with open(os.path.join(filepath,file), "rb") as f:
+    with open(os.path.join(filepath, file), "rb") as f:
         data_bytes = f.read()
 
     try:
         start_time = time.time()
-        resp = post(url = post_url, data = data_bytes, headers = headers, params = params)
+        resp = post(url=post_url, data=data_bytes,
+                    headers=headers, params=params)
         if resp.status_code != 202:
             # print("POST analyze failed:\n%s" % json.dumps(resp.json()))
             # quit()
@@ -41,21 +44,23 @@ def extract_invocie_details(filepath, file):
         max_wait_sec = 60
         while n_try < n_tries:
             try:
-                resp = get(url = get_url, headers = {"Ocp-Apim-Subscription-Key": apim_key})
+                resp = get(url=get_url, headers={
+                           "Ocp-Apim-Subscription-Key": apim_key})
                 resp_json = resp.json()
                 if resp.status_code != 200:
-                    print("GET analyze results failed:\n%s" % json.dumps(resp_json))
+                    print("GET analyze results failed:\n%s" %
+                          json.dumps(resp_json))
                     # quit()
                     return
                 status = resp_json["status"]
                 if status == "succeeded":
                     keyvalue = resp_json["analyzeResult"]["documentResults"]
-                    
-                    keyvaluepair=[]
-                    keyvalueitem={}
+
+                    keyvaluepair = []
+                    keyvalueitem = {}
                     for key, item in keyvalue[0]["fields"].items():
-                        
-                        if key =="Due Date":
+
+                        if key == "Due Date":
                             if item != None:
                                 keyvalueitem["Due Date"] = item["text"]
                             else:
@@ -64,7 +69,7 @@ def extract_invocie_details(filepath, file):
                             if item != None:
                                 keyvalueitem["Invocie Number"] = item["text"]
                             else:
-                                 keyvalueitem["Invocie Number"] ="NA"
+                                keyvalueitem["Invocie Number"] = "NA"
                         elif key == "Invoice To":
                             if item != None:
                                 keyvalueitem["Invoice To"] = item["text"]
@@ -84,14 +89,15 @@ def extract_invocie_details(filepath, file):
                             if item != None:
                                 keyvalueitem["Payment terms"] = item["text"]
                             else:
-                                keyvalueitem["Payment terms"]= "NA"
+                                keyvalueitem["Payment terms"] = "NA"
                         elif key == "Total Amount":
                             if item != None:
                                 keyvalueitem["Total Amount"] = item["text"]
                             else:
-                                keyvalueitem["Total Amount"]= "NA"
+                                keyvalueitem["Total Amount"] = "NA"
                         keyvalueitem["document name"] = file
-                        keyvalueitem["exreaction_time"] = time.time() - start_time
+                        keyvalueitem["exreaction_time"] = time.time() - \
+                            start_time
                     with open('extraction_result/msfr/fr_result.json', 'r') as outfile:
                         fr_extraction = json.load(outfile)
                         fr_extraction.append(resp_json)
@@ -99,7 +105,7 @@ def extract_invocie_details(filepath, file):
                     with open('extraction_result/msfr/fr_result.json', 'w') as outfile:
                         json.dump(fr_extraction, outfile)
 
-                    with open('extraction_result/msfr/result.json' , 'r') as json_file:
+                    with open('extraction_result/msfr/result.json', 'r') as json_file:
                         field_wise_extraction = json.load(json_file)
                         field_wise_extraction.append(keyvalueitem)
 
@@ -110,11 +116,11 @@ def extract_invocie_details(filepath, file):
                     return
                 if status == "failed":
                     print("Analysis failed:\n", file)
-                    #quit()
+                    # quit()
                 # Analysis still running. Wait and retry.
                 time.sleep(wait_sec)
                 n_try += 1
-                wait_sec = min(2*wait_sec, max_wait_sec)     
+                wait_sec = min(2*wait_sec, max_wait_sec)
             except Exception as e:
                 msg = "GET analyze results failed:\n%s" % str(e)
                 print(msg)
@@ -123,5 +129,5 @@ def extract_invocie_details(filepath, file):
 
     except Exception as e:
         print("POST analyze failed:\n%s" % str(e))
-        # quit() 
+        # quit()
         return

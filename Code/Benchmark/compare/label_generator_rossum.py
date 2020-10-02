@@ -2,12 +2,12 @@ import csv
 import json
 import logging
 import re
-import moment 
+import moment
 import pandas as pd
 from fuzzywuzzy import fuzz
 import datetime
 
-LOCALE= "US"
+LOCALE = "US"
 logging.basicConfig(filename="extraction_result/rossum/extract_validator.log",
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
@@ -55,23 +55,27 @@ class ExtractValidator():
     def cleanup(self, gt, answer, field):
         if self.is_date(field):
             if gt.lower().find('days') == -1:
-                if LOCALE =="SG":
+                if LOCALE == "SG":
                     if re.match("^\d{1,2}\/\d{1,2}\/\d{4}$", gt):
-                        format_str = '%d/%m/%Y' # The format
-                        datetime_obj = datetime.datetime.strptime(gt, format_str)
+                        format_str = '%d/%m/%Y'  # The format
+                        datetime_obj = datetime.datetime.strptime(
+                            gt, format_str)
                         gt = str(datetime_obj.date())
-                    elif  re.match("^\d{1,2} \d{1,2} \d{4}$", gt):
-                        format_str = '%d %m %Y' # The format
-                        datetime_obj = datetime.datetime.strptime(gt, format_str)
-                        gt =  str(datetime_obj.date())
+                    elif re.match("^\d{1,2} \d{1,2} \d{4}$", gt):
+                        format_str = '%d %m %Y'  # The format
+                        datetime_obj = datetime.datetime.strptime(
+                            gt, format_str)
+                        gt = str(datetime_obj.date())
                     elif re.match("^\d{1,2}-\d{1,2}-\d{4}$", gt):
-                        format_str = '%d-%m-%Y' # The format
-                        datetime_obj = datetime.datetime.strptime(gt, format_str)
-                        gt =  str(datetime_obj.date())
+                        format_str = '%d-%m-%Y'  # The format
+                        datetime_obj = datetime.datetime.strptime(
+                            gt, format_str)
+                        gt = str(datetime_obj.date())
                     elif re.match("^\d{1,2}.\d{1,2}.\d{4}$", gt):
-                        format_str = '%d.%m.%Y' # The format
-                        datetime_obj = datetime.datetime.strptime(gt, format_str)
-                        gt =  str(datetime_obj.date())
+                        format_str = '%d.%m.%Y'  # The format
+                        datetime_obj = datetime.datetime.strptime(
+                            gt, format_str)
+                        gt = str(datetime_obj.date())
                     else:
                         try:
                             dategt = moment.date(gt)
@@ -79,24 +83,28 @@ class ExtractValidator():
                             gt = dategt[:10]
                         except:
                             pass
-                elif LOCALE =="US":
+                elif LOCALE == "US":
                     try:
                         if re.match("^\d{1,2}\/\d{1,2}\/\d{4}$", gt):
-                            format_str = '%m/%d/%Y' # The format
-                            datetime_obj = datetime.datetime.strptime(gt, format_str)
+                            format_str = '%m/%d/%Y'  # The format
+                            datetime_obj = datetime.datetime.strptime(
+                                gt, format_str)
                             gt = str(datetime_obj.date())
-                        elif  re.match("^\d{1,2} \d{1,2} \d{4}$", gt):
-                            format_str = '%m %d %Y' # The format
-                            datetime_obj = datetime.datetime.strptime(gt, format_str)
-                            gt =  str(datetime_obj.date())
+                        elif re.match("^\d{1,2} \d{1,2} \d{4}$", gt):
+                            format_str = '%m %d %Y'  # The format
+                            datetime_obj = datetime.datetime.strptime(
+                                gt, format_str)
+                            gt = str(datetime_obj.date())
                         elif re.match("^\d{1,2}-\d{1,2}-\d{4}$", gt):
-                            format_str = '%m-%d-%Y' # The format
-                            datetime_obj = datetime.datetime.strptime(gt, format_str)
-                            gt =  str(datetime_obj.date())
+                            format_str = '%m-%d-%Y'  # The format
+                            datetime_obj = datetime.datetime.strptime(
+                                gt, format_str)
+                            gt = str(datetime_obj.date())
                         elif re.match("^\d{1,2}.\d{1,2}.\d{4}$", gt):
-                            format_str = '%d.%m.%Y' # The format
-                            datetime_obj = datetime.datetime.strptime(gt, format_str)
-                            gt =  str(datetime_obj.date())
+                            format_str = '%d.%m.%Y'  # The format
+                            datetime_obj = datetime.datetime.strptime(
+                                gt, format_str)
+                            gt = str(datetime_obj.date())
                         else:
                             try:
                                 dategt = moment.date(gt)
@@ -105,20 +113,21 @@ class ExtractValidator():
                             except:
                                 pass
                     except:
-                            dategt = moment.date(gt)
-                            dategt = str(dategt)
-                            gt = dategt[:10]
+                        dategt = moment.date(gt)
+                        dategt = str(dategt)
+                        gt = dategt[:10]
                 gt, answer = re.sub(
                     "[\/\-\.]", " ", gt), re.sub("[\/\-\.]", " ", answer)
         elif self.is_amount(field):
-            gt, answer = re.sub("[\$\,]", "", gt), re.sub("[\$\,]", "", str(answer))
+            gt, answer = re.sub("[\$\,]", "", gt), re.sub(
+                "[\$\,]", "", str(answer))
 
         return gt.lower().strip(), answer.lower().strip()
 
     def isEM(self, gt, answer, field):
         if self.is_date(field):
-            #if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
-            if (gt==answer) or (answer == "na" and gt == ""):
+            # if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
+            if (gt == answer) or (answer == "na" and gt == ""):
                 return True
         elif self.is_amount(field):
             if fuzz.token_sort_ratio(gt, answer) == 100 or (answer == "na" and gt == ""):
@@ -244,13 +253,12 @@ class ExtractValidator():
             wrong = 0  # Wrong answer
             ocr_quality = 0
 
-
             for k in columns:
-                if k !="document_name":
+                if k != "document_name":
                     lhs = gt[gt['document_name'] ==
                              gt_document_name][k].values[0]
-                    if k=="Due date":
-                       k="net_terms"
+                    if k == "Due date":
+                        k = "net_terms"
                     lhs_temp = lhs
                     rhs = hit[k]
 
@@ -268,14 +276,15 @@ class ExtractValidator():
                     else:
                         wrong += 1
                         label = 'Wrong'
-                    ##for rosumm Due date Validation
-                    if k =="net_terms":
-                        if label=="Wrong":
+                    # for rosumm Due date Validation
+                    if k == "net_terms":
+                        if label == "Wrong":
                             rhs = hit["Due date"]
-                        if label !='EM':
-                            lhs, newrhs = self.cleanup(lhs, hit["Due date"], "Due date")
+                        if label != 'EM':
+                            lhs, newrhs = self.cleanup(
+                                lhs, hit["Due date"], "Due date")
                             if self.isEM(lhs, newrhs, "Due date"):
-                                if label=='NA':
+                                if label == 'NA':
                                     na -= 1
                                 elif label == 'Wrong':
                                     wrong -= 1
@@ -283,19 +292,20 @@ class ExtractValidator():
                                     pm -= 1
                                 em += 1
                                 label = 'EM'
-                            
-                            if label!="PM":
-                                lhs, newrhs = self.cleanup(lhs, hit["Due date"], "Due date")
+
+                            if label != "PM":
+                                lhs, newrhs = self.cleanup(
+                                    lhs, hit["Due date"], "Due date")
                                 if self.isPM(lhs, newrhs, "Due date"):
-                                    if label=='NA':
+                                    if label == 'NA':
                                         na -= 1
                                     elif label == 'Wrong':
-                                        wrong -= 1  
+                                        wrong -= 1
                                     pm += 1
                                     label = 'PM'
-                        k = "Due Date"    
+                        k = "Due Date"
 
-                    lhs =  lhs_temp  
+                    lhs = lhs_temp
                     debug_lines.append(self.debug_lines(
                         document_name, k, lhs, rhs))
                     debug_lines[-1].append("rossum")
@@ -305,7 +315,7 @@ class ExtractValidator():
                         k, lhs, rhs, label))
 
             logging.info("="*71)
-            results.append([document_name, em, pm, na, wrong ,ocr_quality])
+            results.append([document_name, em, pm, na, wrong, ocr_quality])
 
         return results, debug_lines
 
@@ -351,7 +361,7 @@ def main(locale, knowledge, gt, columns):
         writer.writerows(debug_lines)
 
     df = pd.DataFrame(results, columns=['filename', 'EM', 'PM', 'NA',
-                                        'Wrong','OCR_Quality_Mean'])
+                                        'Wrong', 'OCR_Quality_Mean'])
 
     df['score'] = df.apply(lambda x: generate_score(
         x, weights, min_val, max_val), axis=1)
