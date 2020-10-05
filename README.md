@@ -88,7 +88,7 @@ We demonstrate the effectiveness of our system by evaluating on a closed corpus 
    ...
    ...
    ```
-### Ground Truth
+## Ground Truth
    
    Ground truth file should be created at this location ```ground_truth/invoice_ground_truth.csv```
    
@@ -108,6 +108,95 @@ Run the following script to start the benchmark.
 python run.py
 
 ```
+
+## FoI Config
+
+Sample configurations for different document types
+
+### Annual Reports
+```
+{
+        "locale": "US",
+        "domain": "finance",
+        "document_type": "stakeholder reports",
+        "field": "CEO",
+        "field_type": "FOI",
+        "randomisation_type": "plist()",
+        "slot_src": 0,
+        "field_origin": [1],
+        "keywords": ["chief executive officer",
+                     "CEO",
+                     "group chief executive"],
+        "question_prefix": ["who is the"],
+        "response_dtype": "ALPHA",
+        "page_affinity": [],
+        "field_affinity": [],
+        "validation_policy": [{"type": "NER", "entity": "PER"},
+                              {"type": "CQ", "prefix": "who is"}],
+        "probability_threshold": [0.2, 0.2, 0.2],
+        "use_bert": 0,
+        "sort_results_by_confidence": 0,
+        "status": 1
+}
+```
+
+### Invoices
+```
+{
+        "locale": "SG",
+        "domain": "finance",
+        "document_type": "invoice",
+        "field_type": "FOI",
+        "field": "Due date",
+        "randomisation_type": "drange(11111,99999)",
+        "slot_src": 2,
+        "field_origin": [3],
+        "keywords": ["within what term net duration is the amount due",
+                     "within what term duration the invoice is due",
+                     "when is the charge due on",
+                     "when is the amount payable due on",
+                     "when is the due date",
+                     "when is the invoice due date",
+                     "what is the invoice due date"],
+        "question_prefix": [""],
+        "response_dtype": "DATE",
+        "page_affinity": [1, 2],
+        "field_affinity": [],
+        "validation_policy": [{"type": "NER", "entity": "DURATION"},
+                              {"type": "NER", "entity": "DATE"}],
+        "probability_threshold": [0.80, 0.80, 0.70, 0.70, 0.80, 0.80, 0.80],
+        "use_bert": 1,
+        "sort_results_by_confidence": 1,
+        "status": 1
+}
+```
+
+### Master Service Agreement (Contract)
+```
+{
+        "locale": "US",
+        "domain": "legal",
+        "document_type": "master service agreement",
+        "field_type": "FOI",
+        "field": "Effective MSA Date",
+        "randomisation_type": "drange(11111,99999)",
+        "slot_src": 2,
+        "field_origin": [1],
+        "keywords": ["effective date"],
+        "question_prefix": ["what is the"],
+        "response_dtype": "DATE",
+        "page_affinity": [0, 1],
+        "field_affinity": [],
+        "validation_policy": [{"type": "NER", "entity": "DATE"},
+                              {"type": "NER", "entity": "CARDINAL"}],
+        "probability_threshold": [0.2],
+        "use_bert": 1,
+        "sort_results_by_confidence": 1,
+        "status": 1
+}
+```
+
+
 
 ## [Parameters](Parameters)
 
