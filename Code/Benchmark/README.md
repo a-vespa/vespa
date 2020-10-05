@@ -71,7 +71,7 @@
    ...
    ...
    ```
-## Ground Truth
+### Ground Truth
    
    Ground truth file should be created at this location ```ground_truth/invoice_ground_truth.csv```
    
