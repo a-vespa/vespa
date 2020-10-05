@@ -88,6 +88,17 @@ We demonstrate the effectiveness of our system by evaluating on a closed corpus 
    ...
    ...
    ```
+## Ground Truth
+   
+   Ground truth file should be created at this location ```ground_truth/invoice_ground_truth.csv```
+   
+   Sample Ground truth csv:
+   ```
+   document_name,Invoice Number,Invoice From,Invoice To,Invoice Date,Due date,Total Amount
+   Invoice1.pdf,10280,"Kris-Heidenreich, Corporation",ABC Inc,8/20/2018,"['9/20/2018','Net 30']",62.86
+   Invoice2.pdf,10281,"Lang-Hilpert Inc",Rogahn and Sons LLP,13 August 2015,"['Net 30']",123.69
+   ```
+   Note: Ground truth file is required to execute benchmark script.
 
 ### How to use?
 

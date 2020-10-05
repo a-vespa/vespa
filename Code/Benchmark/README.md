@@ -39,24 +39,23 @@
    ...
    ```
 
-3. Update Rossum endpoint and API Authentication Token in [`rossum.py`](extractor/rossum.py).
+3. Update Rossum endpoint and API Authentication Token in [`rossum.py`](Code/Benchmark/extractor/rossum.py).
 
    Note: Create a rossum account and using these credentials, Run the following command to get the API Token.
-   ```
-   # Line No - 11
-   ...
-   url = "https://api.elis.rossum.ai/v1/queues/34281/upload"
-   token = 'token a94ff2e6994a8d09661cb5dcc555e0911943a56d'
-   ...
-   ...
-   ```
-
-
    ```
    curl -s -H 'Content-Type: application/json' -d '{"username": "east-west-trading-co@elis.rossum.ai", "password":"aCo2ohghBo8Oghai"}' 'https://api.elis.rossum.ai/v1/auth/login'
 
    # Output 
    # {"key": "db313f24f5738c8e04635e036ec8a45cdd6d6b03"}
+   ```
+
+   ```
+   # Line No - 11 - rossum.py
+   ...
+   url = "https://api.elis.rossum.ai/v1/queues/34281/upload"
+   token = 'token a94ff2e6994a8d09661cb5dcc555e0911943a56d'
+   ...
+   ...
    ```
 
 4. Update Sypht API Authentication Token in [`sypht`](extractor/sypht.py).
@@ -72,6 +71,17 @@
    ...
    ...
    ```
+## Ground Truth
+   
+   Ground truth file should be created at this location ```ground_truth/invoice_ground_truth.csv```
+   
+   Sample Ground truth csv:
+   ```
+   document_name,Invoice Number,Invoice From,Invoice To,Invoice Date,Due date,Total Amount
+   Invoice1.pdf,10280,"Kris-Heidenreich, Corporation",ABC Inc,8/20/2018,"['9/20/2018','Net 30']",62.86
+   Invoice2.pdf,10281,"Lang-Hilpert Inc",Rogahn and Sons LLP,13 August 2015,"['Net 30']",123.69
+   ```
+   Note: Ground truth file is required to execute benchmark script.
 
 ## How to use?
 
